@@ -1,0 +1,205 @@
+
+
+<head>
+    <link rel="stylesheet" href="/player.component.css" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+
+        }
+
+        /* Create two equal columns that floats next to each other */
+        .column {
+            float: left;
+            width: 50%;
+            padding: 10px;
+            height: 900px;
+            /* Should be removed. Only for demonstration */
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+        @media screen and (max-width: 600px) {
+            .column {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .modal-backdrop.fade {
+            opacity: 0.5;
+        }
+
+        .modal-open .modal {
+            opacity: 1;
+        }
+    </style>
+</head>
+<br>
+<br>
+<div id="col1" class="column">
+
+    <br>
+    <br>
+    <TABLE class ="table-responsive-sm " id="team" BORDER="5" WIDTH="90%" CELLPADDING="5" CELLSPACING="3">
+        <thead>
+            <TR>
+                <TH COLSPAN="5"><BR>
+                    <H3>Golfers you're considering <button *ngIf="this.saveButton" (click)="open(save)" type="button"
+                            class="btn btn-outline-dark">Save
+                            Team</button> </H3>
+                </TH>
+            </TR>
+            <TR>
+                <TH>ID</TH>
+                <TH>Name</TH>
+                <th>Country</th>
+                <th>Value</th>
+                <th>Remove</th>
+            </TR>
+        </thead>
+        <tbody>
+            <tr id="player" *ngFor="let player of team">
+                <td>{{player.ID}}</td>
+                <td>{{player.Name}}</td>
+                <td>{{player.Country}}</td>
+                <td>{{player.Value}}</td>
+                <button (click)="removePlayer(this.player, this.player.ID)" *ngIf="this.player.Selected" type="button"
+                    class="btn btn-outline-danger">Remove Golfer</button>
+            </tr>
+        </tbody>
+    </TABLE>
+    <br>
+    <h3>What your teams currently look like:</h3>
+    <br>
+</div>
+
+<div class="column">
+    <br>
+    <br>
+    <TABLE BORDER="5" WIDTH="90%" CELLPADDING="5" CELLSPACING="3">
+        <thead>
+            <TR>
+                <TH COLSPAN="5"><BR>
+                    <H3>{{tournament}} <input type="text" class="form-control float-right"
+                            placeholder="Search By Name..." style="width:400px" [(ngModel)]="searchTerm"> </H3>
+                </TH>
+            </TR>
+
+            <TR>
+                <TH (click)="sortPlayersByID(this.players)" type="text"> ID </TH>
+                <TH (click)="sortPlayersByName(this.players)" type="text"> Name </TH>
+                <th (click)="sortPlayersByCountry(this.players)" type="text"> Country </th>
+                <th>Value</th>
+                <th>Select</th>
+            </TR>
+        </thead>
+        <tbody>
+
+            <tr class ="table-responsive-sm " *ngFor="let player of filteredPlayers">
+                <td>{{player.ID}} </td>
+                <td>{{player.Name}}</td>
+                <td>{{player.Country}}</td>
+                <td>{{player.Value}}</td>
+
+                <button (click)="selectPlayer(this.player, this.player.ID)" *ngIf="!this.player.Selected" type="button"
+                    class="btn btn-outline-dark">Add Golfer</button>
+                <button (click)="removePlayer(this.player, this.player.ID)" *ngIf="this.player.Selected" type="button"
+                    class="btn btn-outline-danger">Remove Golfer</button>
+            </tr>
+        </tbody>
+    </TABLE>
+
+</div>
+
+<ng-template #save let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Save Team</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <TABLE id="team" BORDER="5" WIDTH="100%" CELLPADDING="5" CELLSPACING="3">
+            <thead>
+                <TR>
+                    <TH COLSPAN="2"><BR>
+                        <H3>Teams You Own</H3>
+                    </TH>
+                </TR>
+                <TR>
+                    <TH>Team ID</TH>
+                    <TH>Team name</TH>
+                </TR>
+            </thead>
+            <tbody>
+                <tr id="team" *ngFor="let team of teams">
+                    <td>{{team.teamID}}</td>
+                    <td>{{team.teamName}}</td>
+                </tr>
+            </tbody>
+        </TABLE>
+        <br>
+        <TABLE id="team" BORDER="5" WIDTH="100%" CELLPADDING="5" CELLSPACING="3">
+            <thead>
+                <TR>
+                    <TH COLSPAN="4"><BR>
+                        <H3>Your new team</H3>
+                    </TH>
+                </TR>
+                <TR>
+                    <TH>ID</TH>
+                    <TH>Name</TH>
+                    <th>Country</th>
+                    <th>Value</th>
+                </TR>
+            </thead>
+            <tbody>
+                <tr id="player" *ngFor="let player of team">
+                    <td>{{player.ID}}</td>
+                    <td>{{player.Name}}</td>
+                    <td>{{player.Country}}</td>
+                    <td>{{player.Value}}</td>
+                </tr>
+            </tbody>
+        </TABLE>
+        <br>
+        <form #f="ngForm" novalidate (ngSubmit)="saveTeam(f)">
+
+                <div class="form-group">
+                    <label for="teamid">Team ID of the team you're updating.</label>
+                    <input id="teamid" type="number" name="teamid" ngModel class="form-control" placeholder="Team ID">
+                </div>
+    
+                <div class="form-group">
+                    <input type="submit" class="btn btn-secondary btn-block" value="Submit">
+                </div>
+    
+                <div *ngIf="errors" class="alert alert-danger" role="alert">
+                    <strong>Oops!</strong> You likely put in the wrong ID. If this persists sign in again.
+                </div>
+    
+                <div *ngIf="success" class="alert alert-success" role="alert">
+                    <strong>Joined! You can close this window now and hit F5.</strong>
+                </div>
+            </form>
+    </div>
+</ng-template>

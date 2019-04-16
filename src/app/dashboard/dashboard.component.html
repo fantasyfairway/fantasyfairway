@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+  html {
+    width: 100%;
+    height: 100%;
+  }
+
+  body {
+    width: 100%;
+    height: 100%;
+
+  }
+</style>
+
+<head>
+  <title>Dashboard Page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {
+
+      background-color: #d3d3d3;
+
+      height: 850px
+        /*have it set at 850px to fit 24in monitor*/
+
+    }
+
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+
+      .row.content {
+        height: auto;
+      }
+    }
+  </style>
+</head>
+
+<head>
+  <title>Convert JSON Data to HTML Table</title>
+  <style>
+    th,
+    td,
+    p,
+    input {
+      font: 14px Verdana;
+    }
+
+    table,
+    th,
+    td {
+      border: solid 1px #DDD;
+      border-collapse: collapse;
+      padding: 2px 3px;
+      text-align: center;
+    }
+
+    th {
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+
+<body>
+  <br>
+  <div class="container-fluid text-center">
+    <div class="row content">
+      <div style="height: 100%" class="col-sm-2 sidenav" id="kryesore" style="overflow-y: scroll;">
+
+        <br>
+        <TABLE BORDER="5" WIDTH="100%" CELLPADDING="5" CELLSPACING="3">
+          <thead>
+            <TR>
+              <TH COLSPAN="3"><br>
+                <H3>Live Leaderboard</H3>
+              </TH>
+            </TR>
+
+            <TR>
+              <TH>Position</TH>
+              <TH>Name</TH>
+              <TH>Score</TH>
+            </TR>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let player of players | slice: 0:10">
+              <td>{{player.CurrentPosition}}</td>
+              <td> {{player.Name}}</td>
+              <td>{{player.Total}}</td>
+            </tr>
+          </tbody>
+
+
+        </TABLE>
+      </div>
+      <div style="background-color: #d3d3d3" id="col2" class="col-sm-8 text-left">
+        <br>
+        <br>
+        <h1 style="text-align:center">Leaderboards for the Current Leagues</h1>
+        <br>
+      </div>
+      <style>
+        div.generic {
+
+          display: flex;
+          background: white;
+          padding: 1rem 1rem 1rem 1rem;
+          border-radius: 0.5rem;
+          box-shadow: 7px 7px 30px -5px rgba(0, 0, 0, 0.1);
+          margin-bottom: 2rem;
+
+
+        }
+
+        div.generic:hover {
+          background: linear-gradient(135deg, gray 0%, red 100%);
+        }
+      </style>
+      <br>
+
+      <div class="col-sm-2 sidenav" id="kryesore" style="overflow-y: scroll;">
+        <br>
+      
+        <div class="generic" height="10px">
+          <a href="http://www.espn.com/golf/" style="text-decoration: none;">
+            <br>
+      
+            <div class="card-block block-1">
+      
+              <p style="text-decoration: none ; color:black;">ESPN Golf</p>
+              <p style="text-decoration: none ; color:black;"> Check out ESPN player stats and leaderboards </p>
+            </div>
+          </a>
+        </div>
+      
+      
+        <div class="generic">
+          <a href="https://www.pgatour.com/" style="text-decoration: none;">
+            <div class="card-block block-2">
+              <p style="text-decoration: none ; color:black;">PGA Tour</p>
+              <p style="text-decoration: none ; color:black;"> Check out PGA Tour player stats and leaderboards </p>
+            </div>
+          </a>
+        </div>
+      
+      
+        <div class="generic">
+          <a href="https://www.golfstats.com/" style="text-decoration: none;">
+            <div class="card-block block-3">
+              <p style="text-decoration: none ; color:black;">GOLF Stats</p>
+              <p style="text-decoration: none ; color:black;"> Search player stats for any tournament </p>
+            </div>
+          </a>
+        </div>
+        <br>
+        <div>
+      
+      
+          <TABLE BORDER="5" WIDTH="100%" CELLPADDING="5" CELLSPACING="3">
+            <thead>
+              <TR>
+                <TH COLSPAN="2"><BR><br>
+                  <H3>Tournament Schedule</H3>
+                </TH>
+              </TR>
+      
+              <TR>
+                <TH>Date</TH>
+                <TH>Tournament</TH>
+      
+              </TR>
+            </thead>
+      
+            <tbody>
+              <tr>
+                <td>OCT 4 - 7</td>
+                <td>Safeway Open</td>
+      
+              </tr>
+              <tr>
+                <td>OCT 11 - 14</td>
+                <td>CIMB Classic</td>
+      
+              </tr>
+              <tr>
+                <td>OCT 18 - 21</td>
+                <td>THE CJ CUP @ NINE BRIDGES</td>
+      
+              </tr>
+              <tr>
+                <td>OCT 25 - 28</td>
+                <td>Sanderson Farms Championship</td>
+      
+              </tr>
+      
+              <tr>
+                <td>OCT 25 - 28</td>
+                <td>World Golf Championships-HSBC Champions</td>
+              </tr>
+      
+              <tr>
+                <td>NOV 1 - 4</td>
+                <td>Shriners Hospitals for Children Open</td>
+              </tr>
+      
+              <tr>
+                <td>NOV 8 - 11</td>
+                <td>Mayakoba Golf Classic</td>
+              </tr>
+      
+              <tr>
+                <td>NOV 15 - 18</td>
+                <td>The RSM Classic</td>
+              </tr>
+      
+              <tr>
+                <td>NOV 22 - 25</td>
+                <td>ISPS Handa Melbourne World Cup of Golf</td>
+              </tr>
+      
+              <tr>
+                <td>NOV 29 - DEC 2</td>
+                <td>Hero World Challenge</td>
+              </tr>
+      
+              <tr>
+                <td>DEC 7 - 9</td>
+                <td>QBE Shootout</td>
+              </tr>
+      
+              <tr>
+                <td>JAN 3 - 6</td>
+                <td>Sentry Tournament of Champions</td>
+              </tr>
+      
+              <tr>
+                <td>JAN 10 - 13</td>
+                <td>Sony Open in Hawaii</td>
+              </tr>
+      
+              <tr>
+                <td>JAN 17 - 20</td>
+                <td>Desert Classic</td>
+              </tr>
+      
+              <tr>
+                <td>JAN 24 - 27</td>
+                <td>Farmers Insurance Open</td>
+              </tr>
+      
+              <tr>
+                <td>JAN 31 - FEB 3</td>
+                <td>Waste Management Phoenix Open</td>
+              </tr>
+      
+              <tr>
+                <td>FEB 7 - 10</td>
+                <td>AT&T Pebble Beach Pro-Am</td>
+              </tr>
+      
+              <tr>
+                <td>FEB 14 - 17</td>
+                <td>Genesis Open </td>
+              </tr>
+      
+              <tr>
+                <td>FEB 21 - 24</td>
+                <td>Puerto Rico Open</td>
+              </tr>
+      
+              <tr>
+                <td>FEB 21 - 24</td>
+                <td>World Golf Championships-Mexico Championship</td>
+              </tr>
+      
+              <tr>
+                <td>FEB 28 - MAR 3</td>
+                <td>The Honda Classic</td>
+              </tr>
+      
+              <tr>
+                <td>MAR 7 - 10</td>
+                <td>Arnold Palmer Invitational presented by Mastercard</td>
+              </tr>
+      
+              <tr>
+                <td>MAR 14 - 17</td>
+                <td>THE PLAYERS Championship</td>
+              </tr>
+      
+              <tr>
+                <td>MAR 21 - 24</td>
+                <td>Valspar Championship</td>
+              </tr>
+      
+              <tr>
+                <td>MAR 27 - 31</td>
+                <td>World Golf Championships-Dell Technologies Match Play</td>
+              </tr>
+      
+              <tr>
+                <td>MAR 28 - 31</td>
+                <td>Corales Puntacana Resort & Club Championship</td>
+              </tr>
+      
+              <tr>
+                <td>APR 4 - 7</td>
+                <td>Valero Texas Open</td>
+              </tr>
+      
+              <tr>
+                <td>APR 11 - 14</td>
+                <td>Masters Tournament</td>
+              </tr>
+      
+              <tr>
+                <td>APR 18 - 21</td>
+                <td>RBC Heritage</td>
+              </tr>
+      
+              <tr>
+                <td>APR 25 - 28</td>
+                <td>Zurich Classic of New Orleans</td>
+              </tr>
+      
+              <tr>
+                <td>MAY 2 - 5</td>
+                <td>Wells Fargo Championship</td>
+              </tr>
+      
+              <tr>
+                <td>MAY 9 - 12</td>
+                <td>AT&T Byron Nelson</td>
+              </tr>
+      
+              <tr>
+                <td>MAY 16 - 19</td>
+                <td>PGA Championship</td>
+              </tr>
+      
+              <tr>
+                <td>MAY 23 - 26</td>
+                <td>Charles Schwab Challenge</td>
+              </tr>
+      
+              <tr>
+                <td>MAY 30 - JUN 2</td>
+                <td>the Memorial Tournament presented by Nationwide</td>
+              </tr>
+      
+              <tr>
+                <td>JUN 6 - 9</td>
+                <td>RBC Canadian Open</td>
+              </tr>
+      
+              <tr>
+                <td>JUN 13 - 16</td>
+                <td>U.S. Open</td>
+              </tr>
+      
+              <tr>
+                <td>JUN 20 - 23</td>
+                <td>Travelers Championship</td>
+              </tr>
+      
+              <tr>
+                <td>JUN 27 - 30</td>
+                <td>Rocket Mortgage Classic</td>
+              </tr>
+      
+              <tr>
+                <td>JUL 11 - 14</td>
+                <td>John Deere Classic</td>
+              </tr>
+      
+      
+              <tr>
+                <td>JUL 18 - 21</td>
+                <td>The Open Championship</td>
+              </tr>
+      
+              <tr>
+                <td>JUL 25 - 28</td>
+                <td>World Golf Championships-FedEx St. Jude Invitational</td>
+              </tr>
+      
+              <tr>
+                <td>JUL 25 - 28</td>
+                <td>Reno-Tahoe Tournament</td>
+              </tr>
+      
+              <tr>
+                <td>AUG 1 - 4</td>
+                <td>Wyndham Championship</td>
+              </tr>
+      
+              <tr>
+                <td>AUG 8 - 11</td>
+                <td>THE NORTHERN TRUST</td>
+              </tr>
+      
+              <tr>
+                <td>AUG 15 - 18</td>
+                <td>BMW Championship</td>
+              </tr>
+      
+              <tr>
+                <td>AUG 22 - 25</td>
+                <td>TOUR Championship</td>
+              </tr>
+      
+              <tr>
+                <td>DEC 9-15</td>
+                <td>Presidents Cup</td>
+              </tr>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+            </tbody>
+      
+      
+          </TABLE>
+        </div>
+      
+      </div>
+      </div>
+      </div>
+      
+      
+      
+      </body>
+      
+      
+      
+      </html>

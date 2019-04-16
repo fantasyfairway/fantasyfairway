@@ -1,0 +1,324 @@
+
+
+
+<br>
+<br>
+<br>
+<br>
+
+<div class="container-fluid">
+  <h1 style="text-align:center">Welcome to the Admin Dashboard</h1>
+  <button style="margin: 5px" type="button" (click)="endWeek()">End the tournament (ONLY PRESS AT THE END OF A
+    TOURNAMENT WEEK)</button>
+  <button style="margin: 5px" type="button" (click)="endWeek()">Reset Players (If the stored players are wrong [WILL
+    BREAK TEAMS])</button>
+  <br>
+  <br>
+
+  <!--<div class="form-group">
+    <input type="text" class="form-control" placeholder="Search By Name..." style="width:400px"
+      [(ngModel)]="searchTerm" />
+  </div>
+
+
+        <div class="container">
+          <table ID=tablData BORDER="5" WIDTH="90%" CELLPADDING="5" CELLSPACING="3">
+            <thead>
+              <TR>
+                <TH COLSPAN="6"><BR>
+                  <H3>List of Users</H3>
+                </TH>
+              </TR>
+              <TR>
+                <TH>ID <button (click)="sortUsersByID(this.users)" type="button" class="btn btn-outline-dark">sort by</button> </TH>
+                <TH>Name <button (click)="sortUsersByName(this.users)" type="button" class="btn btn-outline-dark">sort by</button> </TH>
+                <TH>Username <button (click)="sortUsersByUsername(this.users)" type="button" class="btn btn-outline-dark">sort by</button> </TH>
+                <TH>Email <button (click)="sortUsersByEmail(this.users)" type="button" class="btn btn-outline-dark">sort by</button> </TH>
+                <TH>Leagues</TH>
+                <TH>Number of Wins <button (click)="sortUsersByWins(this.users)" type="button" class="btn btn-outline-dark">sort by</button> </TH>
+                
+              </TR>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of filteredUsers">
+                <td>{{user.ID}}</td>
+                <td>{{user.Name}}</td>
+                <td>{{user.Username}}</td>
+                <td>{{user.Email}}</td>
+                <td>{{user.Leagues}}</td>
+                <td>{{user.Wins}}</td>
+              </tr>
+          </table>
+        </div>
+  </div>
+
+
+  <div class="container">
+  <form class="text-center border border-light p-5" [formGroup]="sendResultsForm" (ngSubmit)="onSend()">
+    
+    <p class="h4 mb-4">Send Reports</p>
+
+    <!-- Drew's dropdown attempt -->
+  <!-- <select [(ngModel)]="currentLeague">
+    <option *ngFor="let league of leagues" [value]="option.id">
+      {{league.name}}
+    </option>
+  </select> -->
+
+  <!-- Tournament -->
+  <label>Recipients:</label>
+  <select formControlName="sendReportsTournament" class="browser-default custom-select mb-4">
+    <option value="" disabled>Select an option</option>
+    <option value="1" selected>All</option>
+    <option value="2">Bulldogs</option>
+    <option value="3">Garage Golf</option>
+    <option value="4">Line Drivers</option>
+  </select>
+
+
+  <!-- Subject -->
+  <label>Subject</label>
+  <select formControlName="sendReportsSubjects" class="browser-default custom-select mb-4">
+    <option value="" disabled>Choose option</option>
+    <option value="1" selected>Line-up Reminder</option>
+    <option value="2">Weekly Score</option>
+    <option value="3">Overall Score</option>
+    <option value="4">Other</option>
+  </select>
+
+  <!-- Message -->
+  <div class="form-group">
+    <textarea formControlName="sendReportsMessage" class="form-control rounded-0" mdbInputDirective
+      id="exampleFormControlTextarea2" rows="3" placeholder="Additional Message"></textarea>
+  </div>
+
+
+  <!-- Send button -->
+  <button mdbBtn color="info" outline="true" block="true" class="z-depth-0 my-4 waves-effect" mdbWavesEffect
+    type="submit" [disabled]="disabledSendButton">Send Reports</button>
+
+</div>
+
+<div class="container-fluid">
+  <br>
+  <br>
+
+  <!--<div class="form-group">
+      <input type="text" class="form-control" placeholder="Search By Name..." style="width:400px"
+        [(ngModel)]="searchTerm" />
+    </div>-->
+
+
+  <div class="row">
+    <div class="col-4">
+      <table ID="tablUsers" BORDER="5" WIDTH="100%" CELLPADDING="5" CELLSPACING="3">
+        <thead>
+          <TR>
+            <TH COLSPAN="4"><BR>
+              <H3>List of Users</H3>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search By Name..." style="width:400px"
+                  [(ngModel)]="searchTerm" />
+              </div>
+            </TH>
+          </TR>
+          <TR>
+            <TH>ID <button (click)="sortUsersByID(this.users)" type="button" class="btn btn-outline-dark">sort
+                by</button>
+            </TH>
+            <TH>Name <button (click)="sortUsersByName(this.users)" type="button" class="btn btn-outline-dark">sort
+                by</button> </TH>
+            <TH>Username <button (click)="sortUsersByUsername(this.users)" type="button"
+                class="btn btn-outline-dark">sort
+                by</button> </TH>
+            <TH>Email <button (click)="sortUsersByEmail(this.users)" type="button" class="btn btn-outline-dark">sort
+                by</button> </TH>
+
+          </TR>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{user.id}}</td>
+            <td>{{user.firstName}} {{user.lastName}}</td>
+            <td>{{user.username}}</td>
+            <td>{{user.email}}</td>
+          </tr>
+      </table>
+    </div>
+    <br>
+    <div class="col-4">
+      <table ID="tablLeagues" BORDER="5" WIDTH="100%" CELLPADDING="5" CELLSPACING="3">
+        <thead>
+          <TR>
+            <TH COLSPAN="4"><BR>
+              <H3>List of Leagues</H3>
+              <button (click)="open(create)">Create a League</button>
+              <button (click)="open(edit)">Edit a League</button>
+              <button (click)="open(delete)">Delete a League</button>
+            </TH>
+          </TR>
+          <TR>
+            <TH>ID </TH>
+            <TH>League Name </TH>
+            <TH>Active </TH>
+            <TH>Picture </TH>
+          </TR>
+        </thead>
+        <tbody>
+          <tr id *ngFor="let league of leagues">
+            <td>{{league.leagueId}}</td>
+            <td>{{league.leagueName}}</td>
+            <td>{{league.active}}</td>
+            <td><img src="{{league.picture}}" width="25%" height="auto"></td>
+          </tr>
+      </table>
+    </div>
+    <div class="col-4">
+      <table ID="tablLeagues" BORDER="5" WIDTH="100%" CELLPADDING="5" CELLSPACING="3">
+        <thead>
+          <TR>
+            <TH COLSPAN="4"><BR>
+              <H3>List of Users and the Leagues They Are In</H3>
+            </TH>
+          </TR>
+          <TR>
+            <TH>USER ID </TH>
+            <TH>Username </TH>
+            <TH>League Name </TH>
+            <TH>Team Name </TH>
+          </TR>
+        </thead>
+        <tbody>
+          <tr id *ngFor="let UL of usersInLeagues">
+            <td>{{UL.userID}}</td>
+            <td>{{UL.userName}}</td>
+            <td>{{UL.leagueName}}</td>
+            <td>{{UL.teamName}}</td>
+          </tr>
+      </table>
+    </div>
+  </div>
+
+  <ng-template #create let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">League Create</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #f="ngForm" novalidate (ngSubmit)="createLeagues(f)">
+
+        <div class="form-group">
+          <label for="leagueName">League Name</label>
+          <input id="leagueName" type="text" name="leagueName" [ngModel]="leagueDetails.leagueName" ngModel tmFocus
+            class="form-control" placeholder="League Name">
+        </div>
+
+        <div class="form-group">
+          <label for="active">Active?</label>
+          <input style="align-self:right" id="active" type="checkbox" name="active" [ngModel]="leagueDetails.active"
+            class="form-control" ngModel>
+        </div>
+
+        <div class="form-group">
+          <label for="picture">Picture</label>
+          <input id="picture" type="text" name="picture" [ngModel]="leagueDetails.picture" ngModel class="form-control"
+            placeholder="Picture URL">
+        </div>
+
+        <div class="form-group">
+          <input type="submit" class="btn btn-secondary btn-block" value="Submit">
+        </div>
+
+        <div *ngIf="errors" class="alert alert-danger" role="alert">
+          <strong>Oops!</strong> {{errors}}
+        </div>
+        <div *ngIf="success" class="alert alert-success" role="alert">
+          <strong>Created! You can close this window now and hit F5.</strong>
+        </div>
+      </form>
+    </div>
+  </ng-template>
+
+  <ng-template #edit let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">League update</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #f="ngForm" novalidate (ngSubmit)="updateLeagues(f)">
+
+        <div class="form-group">
+          <label for="id">League ID</label>
+          <input id="id" type="number" name="id" [ngModel]="leagueDetails.id" ngModel class="form-control"
+            placeholder="League Id">
+        </div>
+
+        <div class="form-group">
+          <label for="leagueName">League Name</label>
+          <input id="leagueName" type="text" name="leagueName" [ngModel]="leagueDetails.leagueName" ngModel
+            class="form-control" placeholder="League Name">
+        </div>
+
+        <div class="form-group">
+          <label for="active">Active?</label>
+          <input style="align-self:right" id="active" type="checkbox" name="active" [ngModel]="leagueDetails.active"
+            class="form-control" ngModel>
+        </div>
+
+        <div class="form-group">
+          <label for="picture">Picture</label>
+          <input id="picture" type="text" name="picture" [ngModel]="leagueDetails.picture" ngModel class="form-control"
+            placeholder="Picture URL">
+        </div>
+
+        <div class="form-group">
+          <input type="submit" class="btn btn-secondary btn-block" value="Submit">
+        </div>
+
+        <div *ngIf="errors" class="alert alert-danger" role="alert">
+          <strong>Oops!</strong> {{errors}}
+        </div>
+
+        <div *ngIf="success" class="alert alert-success" role="alert">
+          <strong>Changed! You can close this window now and hit F5.</strong>
+        </div>
+      </form>
+    </div>
+  </ng-template>
+
+
+  <ng-template #delete let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">League delete (MAKE SURE THAT THE ID IS CORRECT AND YOU KNOW WHAT
+        YOU'RE DOING, THERE IS NO WAY TO UNDO THIS) </h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #f="ngForm" novalidate (ngSubmit)="deleteLeagues(f)">
+
+        <div class="form-group">
+          <label for="id">League ID</label>
+          <input id="id" type="number" name="id" [ngModel]="leagueDetails.id" ngModel class="form-control"
+            placeholder="League Id">
+        </div>
+
+        <div class="form-group">
+          <input type="submit" class="btn btn-secondary btn-block" value="Submit">
+        </div>
+
+        <div *ngIf="errors" class="alert alert-danger" role="alert">
+          <strong>Oops!</strong> {{errors}}
+        </div>
+
+        <div *ngIf="success" class="alert alert-success" role="alert">
+          <strong>Deleted! You can close this window now and hit F5.</strong>
+        </div>
+      </form>
+    </div>
+  </ng-template>

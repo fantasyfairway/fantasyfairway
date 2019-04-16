@@ -1,0 +1,84 @@
+.avatar {
+   
+  width: 175px;
+  height: 175px;
+  border-radius: 50%;
+  margin: 10%;
+
+}
+
+.ngbtabset{
+  position: relative;
+  z-index: 1;
+
+}
+
+
+body{
+  background-image: url("../img/grass1.jpg");
+   background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+.container{
+  
+    padding: 25px;
+   position:relative;
+   background-color: white;
+   
+}
+
+.page{
+  background-image: url("../img/grass1.jpg");
+  height: 900px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+ 
+  
+  
+  
+}
+
+/* Remove the navbar's default margin-bottom and rounded borders */
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {
+
+     
+      height: 850px
+        /*have it set at 850px to fit 24in monitor*/
+
+    }
+
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+
+ 
+
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+
+      .row.content {
+        height: auto;
+      }
+    }
+
+    

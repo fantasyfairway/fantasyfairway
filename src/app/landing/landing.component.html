@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Fantasy Golf</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+        integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald" rel="stylesheet">
+
+</head>
+
+
+<body>
+
+    <link rel="stylesheet" href="/landing.component.css" type="text/css">
+    <!--<link rel="stylesheet" href="login-signin.css" type="text/css"> -->
+
+    <div class="jumbotron">
+        <div class="header1">
+            <h1 style="font-size: 50px">Fantasy Golf</h1>
+
+            <button type="button" class="btn btn-primary btn-lg" [routerLink]="['/login']">
+                Log in
+            </button>
+            <button type="button" class="btn btn-primary btn-lg" [routerLink]="['/signup']">
+                Sign Up
+            </button>
+
+            <!--<div class= "nav-item" data-toggle="collapse" data-target=".navbar-collapse.show" routerLinkActive="active"> 
+            <a class="nav-link" [routerLink]="['/login']">Login</a>
+    </div>-->
+        </div>
+    </div>
+
+    <div class="header2">
+        <h1 style="font-size: 50px">Start Playing Today</h1>
+    </div>
+    <div class="container">
+
+
+
+        <!--<br><br><br>-->
+        <div class="section">
+            <div class="content">
+                <div class="heading">
+                    <h2 class="pl-sm-5 ">
+                        How To Get Started
+                    </h2>
+
+                </div>
+                <br>
+                <br>
+                <div class="row">
+                    <div class="col-lg-6 mbr-col-md-10">
+                        <div class="wrap">
+                            <div class="ico-wrap">
+                                <span class="mbr-iconfont  fa fa-sign-in "></span>
+                            </div>
+                            <div class="text-wrap vcenter" [routerLink]="['/signup']">
+                                <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"> Create
+                                    <span>Account </span>
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 mbr-col-md-10">
+                        <div class="wrap">
+                            <div class="ico-wrap">
+                                <span class="mbr-iconfont fa fa-hand-o-up"></span>
+                            </div>
+                            <div class="text-wrap vcenter" (click)="redirect('league')">
+                                <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">Join
+                                    <span>League</span>
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-6 mbr-col-md-10">
+                        <div class="wrap">
+                            <div class="ico-wrap">
+                                <span class="mbr-iconfont fa fa-plus"></span>
+                            </div>
+                            <div class="text-wrap vcenter" (click)="redirect('player')">
+                                <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">Create
+                                    <span>Team</span>
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mbr-col-md-10">
+                        <div class="wrap">
+                            <div class="ico-wrap">
+                                <span class="mbr-iconfont fa fa-check"></span>
+                            </div>
+                            <div class="text-wrap vcenter" (click)="redirect('player')">
+                                <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">Submit
+                                    <span>Lineup</span>
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="parallax"></div>
+    <div class="parallax">
+        <div class="container">
+            <h2 class="header3 ">
+                How To Play
+            </h2>
+            <br>
+
+            <div class="row ">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="card-text">At the beginning of each week, users will be given a $1000 to spend on
+                                players to form their team.</p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <p class="card-text">Users will have the option to pick their team from over 100+ golfers on
+                                the
+                                PGA tour.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <p class="card-text"> Golfers will be globally ranked and given a dollar value.
+                                <br>
+                                <br> The top ten golfers will be valued at $500, golfers 11-20 will
+                                <br> be worth $200, and golfers 21+ will be valued at $100
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <BR>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <p class="card-text">Each user must spend their full $1000 dollars to form a team. Users can
+                                have as few as two top ranked
+                                golfers valued at $500 and as many as 10 golfers valued at $100</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <p class="card-text">Each team must have their lineup set by the start of each tournament.
+                                <br>
+                                <br> Scores for each team will be calculated relative to par. Meaning, if a team of two
+                                golfers shoot
+                                (-5) and (-10) the team score will be (-15).</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <p class="card-text">Scores for rounds one through four will be added together to form a
+                                final
+                                score for each team</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="parallax"></div>
+    <!--<footer>
+    <p><a href="#">Terms and Conditions link</a></p>
+</footer> -->
+</body>
+
+</html>

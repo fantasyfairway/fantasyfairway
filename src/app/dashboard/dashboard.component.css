@@ -1,0 +1,10 @@
+.home {
+  background-color: gray;
+  text-align: center;
+  padding: 20px;
+}
+
+.well {
+  border: 2px green;
+
+}

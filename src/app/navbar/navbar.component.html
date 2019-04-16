@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="/navbar.component.css" type="text/css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+
+</head>
+
+<header>
+  <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar fixed-top navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Fantasy Fairway</a>
+      <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse show " [ngClass]="{ 'show': navbarOpen }">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show" routerLinkActive="active">
+            <a class="nav-link" (click)="toggleNavbar()" [routerLink]="['/landing']">Landing Page</a>
+          </li>
+          <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show" routerLinkActive="active">
+            <a class="nav-link" (click)="toggleNavbar()" [routerLink]="['/profile']" *ngIf="readLocalStorageValue()">My
+              Profile</a>
+          </li>
+          <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show" routerLinkActive="active">
+            <a class="nav-link" (click)="toggleNavbar()" [routerLink]="['/admin']" *ngIf="readLocalStorageValue()">Admin</a>
+          </li>
+          <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show" routerLinkActive="active">
+            <a class="nav-link" (click)="toggleNavbar()" [routerLink]="['/league']" *ngIf="readLocalStorageValue()">My
+              Leagues</a>
+          </li>
+          <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show" routerLinkActive="active">
+            <a class="nav-link" [routerLink]="['/tournaments']" *ngIf="readLocalStorageValue()">Past Tournaments</a>
+          </li>
+          <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show" routerLinkActive="active">
+            <a class="nav-link" (click)="toggleNavbar()" [routerLink]="['/dashboard']"
+              *ngIf="readLocalStorageValue()">Dashboard</a>
+          </li>
+          <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show" routerLinkActive="active">
+            <a class="nav-link" (click)="toggleNavbar()" [routerLink]="['/player']" *ngIf="readLocalStorageValue()">Manage
+              Team</a>
+          </li>
+          <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show" routerLinkActive="active">
+            <a class="nav-link" (click)="toggleNavbar()" [routerLink]="['/help']" *ngIf="readLocalStorageValue()">Help</a>
+          <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show" routerLinkActive="active">
+            <a class="nav-link" [routerLink]="['/landing']" *ngIf="readLocalStorageValue()" (click)="logoff()">Log-Off</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+
+</html>

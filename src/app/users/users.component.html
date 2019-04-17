@@ -92,26 +92,26 @@
 
 
 <div class = "formbuttons">
-  <form class="container-fluid" [formGroup]="sendWeeklyReportsForm" (ngSubmit)="onSendWeeklyReport()">
+  <form class="container-fluid" [formGroup]="sendWeeklyReport" (ngSubmit)="onSendWeeklyReport()">
   <h1 style="text-align:center">Send Emails</h1>
 
     <!-- Send weekly reports button -->
     <button style="margin: 5px" mdbBtn color="info" outline="true" block="true"  mdbWavesEffect
-    type="submit" [disabled]="disabledSendButton">Send Weekly Report</button>
+    type="submit" [disabled]="disabledSubmitButton">Send Weekly Report</button>
   </form>
 
 
-  <form class="container-fluid" [formGroup]="sendOverallReportsForm" (ngSubmit)="onSendOverallReport()">
+  <form class="container-fluid" [formGroup]="sendOverallReport" (ngSubmit)="onSendOverallReport()">
    <!-- Send overall reports button -->
      <button style="margin: 5px" mdbBtn color="info" outline="true" block="true"  mdbWavesEffect
-     type="submit" [disabled]="disabledSendButton">Send Overall Report</button>
+     type="submit" [disabled]="disabledSubmitButton">Send Overall Report</button>
   </form>
 
 
-  <form class="container-fluid" [formGroup]="sendSignUpReminderForm" (ngSubmit)="onSendSignUpReminder()">
+  <form class="container-fluid" [formGroup]="sendSignUpReminder" (ngSubmit)="onSendSignUpReminder()">
    <!-- Send sign up reminders button -->
     <button mdbBtn style="margin: 5px" color="info" outline="true" block="true"  mdbWavesEffect
-    type="submit" [disabled]="disabledSendButton">Send Sign-up Reminder</button>
+    type="submit" [disabled]="disabledSubmitButton">Send Sign-up Reminder</button>
   </form>
 
 
@@ -123,7 +123,7 @@
   </div>
 
   <button mdbBtn style="margin: 5px" color="info" outline="true" block="true" mdbWavesEffect
-  type="submit"[disabled]="disabledSendButton">Send Other Message</button>
+  type="submit"[disabled]="disabledSubmitButton">Send Other Message</button>
   </form>
 </div>
 

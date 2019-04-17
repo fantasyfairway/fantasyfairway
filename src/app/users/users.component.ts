@@ -16,13 +16,15 @@ import { UserService } from '../shared/services/user.service';
 import { LeagueUserDetails } from '../shared/models/leagueuser.details';
 import { finalize } from 'rxjs/operators';
 import { TeamService } from '../shared/services/team.service';
+import { TournamentService } from '../shared/services/tournament.service';
+import { PlayerService } from '../shared/services/player.service';
 
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
-  
+
 
 })
 
@@ -35,10 +37,10 @@ export class UsersComponent implements OnInit {
   leaderboard: any;
   tour: any;
   tournament: any;
-  players: Player [] = []; 
+  players: Player[] = [];
   filteredPlayers: Player[] = [];
   leagueNames: LeagueName;
-  team:Player[]=[];
+  team: Player[] = [];
   submitted: any;
   isRequesting: any;
   errors: any;
@@ -47,7 +49,7 @@ export class UsersComponent implements OnInit {
   leagues: any;
   filteredUsers: UserDetails[] = [];
   filteredLeagues: LeagueDetails[] = [];
-  leagueDetails: LeagueDetails = { id: 0, leagueName : ' ', active : false, picture : ''};
+  leagueDetails: LeagueDetails = { id: 0, leagueName: ' ', active: false, picture: '' };
   leagueUserDetails: LeagueUserDetails;
   usersInLeagues: any;
   dashboard: any;
@@ -56,15 +58,35 @@ export class UsersComponent implements OnInit {
   closeResult: string;
 
 
-  sendResultsForm: FormGroup;
+  //sendResultsForm: FormGroup;
+  
+  sendOtherMessageForm: FormGroup;
+  sendSignUpReminderForm: FormGroup;
+  sendWeeklyReportsForm: FormGroup;
+  sendOverallReportsForm: FormGroup;
+
+
   disabledSendButton: boolean = true;
   optionsSelect: Array<any>;
 
   @HostListener('input') oninput() {
 
-    if (this.sendResultsForm.valid) {
+    if (this.sendOtherMessageForm.valid) {
       this.disabledSendButton = false;
     }
+
+    if (this.sendSignUpReminderForm.valid) {
+      this.disabledSendButton = false;
+    }
+
+    if (this.sendWeeklyReportsForm.valid) {
+      this.disabledSendButton = false;
+    }
+
+    if (this.sendOverallReportsForm.valid) {
+      this.disabledSendButton = false;
+    }
+
   }
 
 
@@ -93,13 +115,20 @@ export class UsersComponent implements OnInit {
     return this.leagues.filter(league => league.leagueName.toLowerCase().indexOf(searchString.toLowerCase()) !== -1);
   }
 
-  constructor(private leagueService: LeagueService, private modalService: NgbModal,private fb: FormBuilder, private connectionService: ConnectionService, private userService: UserService , private teamService: TeamService) {
-    this.sendResultsForm = fb.group({
+  constructor(private leagueService: LeagueService, private modalService: NgbModal, private fb: FormBuilder,
+    private connectionService: ConnectionService,
+    private userService: UserService,
+    private teamService: TeamService,
+    private playerService: PlayerService,
+    private tournamentService: TournamentService,
+    private http: HttpClient, ) {
+    this.sendOtherMessageForm = fb.group({
+
       'sendReportsTournament': ['', Validators.required],
       'sendReportsSubjects': ['', Validators.required],
       'contactFormCopy': [''],
     });
-   }
+  }
 
   ngOnInit() {
     this.userService.getUsers().subscribe((userDetails: UserDetails) => {
@@ -161,26 +190,26 @@ export class UsersComponent implements OnInit {
     this.submitted = true;
     this.isRequesting = true;
     this.errors = '';
-      this.userService.endWeek()
-        .pipe(finalize(() => this.isRequesting = false))
-        .subscribe(
-          result => {
-            if (result) {
-              this.success = true;
-              setTimeout(function () { window.location.reload(); }, 10)
-            }
-          },
-          errors => this.errors = errors);
+    this.userService.endWeek()
+      .pipe(finalize(() => this.isRequesting = false))
+      .subscribe(
+        result => {
+          if (result) {
+            this.success = true;
+            setTimeout(function () { window.location.reload(); }, 10);
+          }
+        },
+        errors => this.errors = errors);
   }
 
-resultsTable() {
-  //one email for the new players are in submit lineup by Thursday   "Lineup reminder"
-  // one email for weekly score update - what happened in that tournament  "Weekly Score"
-  // one for the global score update - your total score to date  "Overall Score"
-  // invite a friend thing - LAST nth   "Invite a friend"
-}
+  resultsTable() {
+    //one email for the new players are in submit lineup by Thursday   "Lineup reminder"
+    // one email for weekly score update - what happened in that tournament  "Weekly Score"
+    // one for the global score update - your total score to date  "Overall Score"
+    // invite a friend thing - LAST nth   "Invite a friend"
+  }
 
-  onSend() {
+  /*onSend() {
     this.connectionService.sendMessage(this.sendResultsForm.value).subscribe(() => {
       alert('Your message has been sent.');
       this.sendResultsForm.reset();
@@ -188,8 +217,48 @@ resultsTable() {
     }, error => {
       console.log('Error', error);
     });
+  }*/
+
+  onSendWeeklyReport() {
+    this.connectionService.sendMessage(this.sendWeeklyReportsForm.value).subscribe(() => {
+      alert('Your message has been sent.');
+      this.sendWeeklyReportsForm.reset();
+      this.disabledSendButton = true;
+    }, error => {
+      console.log('Error', error);
+    });
   }
 
+  onSendOverallReport() {
+    this.connectionService.sendMessage(this.sendOverallReportsForm.value).subscribe(() => {
+      alert('Your message has been sent.');
+      this.sendOverallReportsForm.reset();
+      this.disabledSendButton = true;
+    }, error => {
+      console.log('Error', error);
+    });
+  }
+
+  onSendSignUpReminder() {
+    this.connectionService.sendMessage(this.sendSignUpReminderForm.value).subscribe(() => {
+      alert('Your message has been sent.');
+      this.sendSignUpReminderForm.reset();
+      this.disabledSendButton = true;
+    }, error => {
+      console.log('Error', error);
+    });
+  }
+
+  onSendOtherMessage() {
+    console.log("hello");
+    this.connectionService.sendMessage(this.sendOtherMessageForm.value).subscribe(() => {
+      alert('Your message has been sent.');
+      this.sendOtherMessageForm.reset();
+      this.disabledSendButton = true;
+    }, error => {
+      console.log('Error', error);
+    });
+  }
 
   sortLeaguesByName(unsortedLeagues) {
     this.filteredLeagues = unsortedLeagues.sort((LeagueA: LeagueDetails, LeagueB: LeagueDetails) => {
@@ -234,6 +303,85 @@ resultsTable() {
           errors => this.errors = errors);
     }
 
+  }
+
+  getPlayersGO() {
+    this.http.get('http://204.48.31.158:8000/?format=json').subscribe(response => {
+      this.data = response;
+      console.log(this.data);
+      this.leaderboard = this.data.Leaderboards;
+      this.tour = this.getTour(this.leaderboard);
+      this.tournament = this.tour.Tournament;
+      this.players = this.tour.Players;
+      console.log(this.players);
+      this.sortByCupRank();
+      this.assignValues();
+      this.filteredPlayers = this.players;
+      this.playerService.deletePlayers().pipe(finalize(() => this.isRequesting = false))
+        .subscribe(
+          result => {
+            if (result) {
+            }
+          },
+          errors => this.errors = errors);
+      this.filteredPlayers.forEach(element => {
+        this.playerService.createPlayer(element.Name,
+          element.Rounds[0], element.Rounds[1], element.Rounds[2], element.Rounds[3],
+          element.ID, element.Value)
+          .pipe(finalize(() => this.isRequesting = false))
+          .subscribe(
+            result => {
+              if (result) {
+              }
+            },
+            errors => this.errors = errors);
+      });
+      this.tournamentService.createTournament(this.tournament, this.tour.Date)
+        .pipe(finalize(() => this.isRequesting = false))
+        .subscribe(
+          result => {
+            if (result) {
+            }
+          },
+          errors => this.errors = errors);
+    });
+  }
+
+  sortByCupRank() {
+    function compare(a, b) {
+      if (a.Rankings.cup_points > b.Rankings.cup_points)
+        return -1;
+      if (a.Rankings.cup_points < b.Rankings.cup_points)
+        return 1;
+      return 0;
+    }
+    this.players.sort(compare);
+  }
+
+
+  getTour(leaderboard) {
+    for (this.x; this.x < 3; this.x++) {
+      if (leaderboard[this.x].Tour == "PGA Tour") {
+        return (leaderboard[this.x]);
+      }
+    }
+  }
+
+  assignValues() {
+    var arrayLength = this.players.length;
+    for (this.i; this.i < arrayLength; this.i++) {
+      this.players[this.i].Selected = false;
+      this.players[this.i].ID = this.i;
+      if (this.i <= 9) {
+        this.players[this.i].Value = 500;
+      }
+      else if (this.i >= 10 && this.i <= 19) {
+        this.players[this.i].Value = 200;
+      }
+      else if (this.i >= 20 && this.i < arrayLength) {
+        this.players[this.i].Value = 100;
+      }
+    }
   }
 
   deleteLeagues({ value, valid }: { value: LeagueDetails, valid: boolean }) {

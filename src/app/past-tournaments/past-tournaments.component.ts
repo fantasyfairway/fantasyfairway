@@ -48,13 +48,9 @@ export class PastTournamentsComponent implements OnInit {
       this.tournaments = response;
       console.log(this.tournaments);
       this.tournaments.forEach(tournament => {
-        let h1 = document.createElement('h1');
-        h1.style.textAlign = "center";
-        h1.innerHTML = "Leaderboards for Past Tournaments";
         let h3 = document.createElement('h3');
         h3.style.textAlign = "center";
         h3.innerHTML = tournament.tournamentName;
-        document.getElementById("col2").append(h1);
         document.getElementById("col2").append(h3);
 
 

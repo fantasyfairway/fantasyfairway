@@ -10,7 +10,7 @@
   <h1 style="text-align:center">Welcome to the Admin Dashboard</h1>
   <button style="margin: 5px" type="button" (click)="endWeek()">End the tournament (ONLY PRESS AT THE END OF A
     TOURNAMENT WEEK)</button>
-  <button style="margin: 5px" type="button" (click)="endWeek()">Reset Players (If the stored players are wrong [WILL
+  <button style="margin: 5px" type="button" (click)="getPlayersGO()">Reset Players (If the stored players are wrong [WILL
     BREAK TEAMS])</button>
   <br>
   <br>
@@ -65,7 +65,11 @@
     </option>
   </select> -->
 
-  <!-- Tournament -->
+
+
+
+
+  <!-- Tournament 
   <label>Recipients:</label>
   <select formControlName="sendReportsTournament" class="browser-default custom-select mb-4">
     <option value="" disabled>Select an option</option>
@@ -73,10 +77,10 @@
     <option value="2">Bulldogs</option>
     <option value="3">Garage Golf</option>
     <option value="4">Line Drivers</option>
-  </select>
+  </select>-->
 
 
-  <!-- Subject -->
+  <!-- Subject 
   <label>Subject</label>
   <select formControlName="sendReportsSubjects" class="browser-default custom-select mb-4">
     <option value="" disabled>Choose option</option>
@@ -84,19 +88,47 @@
     <option value="2">Weekly Score</option>
     <option value="3">Overall Score</option>
     <option value="4">Other</option>
-  </select>
+  </select>-->
 
-  <!-- Message -->
+
+<div class = "formbuttons">
+  <form class="container-fluid" [formGroup]="sendWeeklyReport" (ngSubmit)="onSendWeeklyReport()">
+  <h1 style="text-align:center">Send Emails</h1>
+
+    <!-- Send weekly reports button -->
+    <button style="margin: 5px" mdbBtn color="info" outline="true" block="true"  mdbWavesEffect
+    type="submit" [disabled]="disabledSubmitButton">Send Weekly Report</button>
+  </form>
+
+
+  <form class="container-fluid" [formGroup]="sendOverallReport" (ngSubmit)="onSendOverallReport()">
+   <!-- Send overall reports button -->
+     <button style="margin: 5px" mdbBtn color="info" outline="true" block="true"  mdbWavesEffect
+     type="submit" [disabled]="disabledSubmitButton">Send Overall Report</button>
+  </form>
+
+
+  <form class="container-fluid" [formGroup]="sendSignUpReminder" (ngSubmit)="onSendSignUpReminder()">
+   <!-- Send sign up reminders button -->
+    <button mdbBtn style="margin: 5px" color="info" outline="true" block="true"  mdbWavesEffect
+    type="submit" [disabled]="disabledSubmitButton">Send Sign-up Reminder</button>
+  </form>
+
+
+  <form class="container-fluid" [formGroup]="sendOtherMessageForm" (ngSubmit)="onSendOtherMessage()">
+  <!--Send other Message -->
   <div class="form-group">
-    <textarea formControlName="sendReportsMessage" class="form-control rounded-0" mdbInputDirective
-      id="exampleFormControlTextarea2" rows="3" placeholder="Additional Message"></textarea>
+    <textarea formControlName="sendOtherMessageForm" class="form-control rounded-0" mdbInputDirective
+      id="exampleFormControlTextarea2" rows="2" placeholder="Other Message"></textarea>
   </div>
 
+  <button mdbBtn style="margin: 5px" color="info" outline="true" block="true" mdbWavesEffect
+  type="submit"[disabled]="disabledSubmitButton">Send Other Message</button>
+  </form>
+</div>
 
-  <!-- Send button -->
+  <!-- Send button OG code
   <button mdbBtn color="info" outline="true" block="true" class="z-depth-0 my-4 waves-effect" mdbWavesEffect
-    type="submit" [disabled]="disabledSendButton">Send Reports</button>
-
 </div>
 
 <div class="container-fluid">
@@ -110,14 +142,14 @@
 
 
   <div class="row">
-    <div class="col-4">
-      <table ID="tablUsers" BORDER="5" WIDTH="100%" CELLPADDING="5" CELLSPACING="3">
+    <div class="column">
+      <table ID="tablUsers" BORDER="5" WIDTH="95%" CELLPADDING="5" CELLSPACING="3">
         <thead>
           <TR>
             <TH COLSPAN="4"><BR>
               <H3>List of Users</H3>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search By Name..." style="width:400px"
+                <input type="text" class="form-control" placeholder="Search By Name..." style="width:200px"
                   [(ngModel)]="searchTerm" />
               </div>
             </TH>
@@ -146,8 +178,8 @@
       </table>
     </div>
     <br>
-    <div class="col-4">
-      <table ID="tablLeagues" BORDER="5" WIDTH="100%" CELLPADDING="5" CELLSPACING="3">
+    <div class="column">
+      <table ID="tablLeagues" BORDER="5" WIDTH="95%" CELLPADDING="5" CELLSPACING="3">
         <thead>
           <TR>
             <TH COLSPAN="4"><BR>
@@ -173,8 +205,8 @@
           </tr>
       </table>
     </div>
-    <div class="col-4">
-      <table ID="tablLeagues" BORDER="5" WIDTH="100%" CELLPADDING="5" CELLSPACING="3">
+    <div class="column">
+      <table ID="tablLeagues" BORDER="5" WIDTH="95%" CELLPADDING="5" CELLSPACING="3">
         <thead>
           <TR>
             <TH COLSPAN="4"><BR>

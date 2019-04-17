@@ -37,6 +37,17 @@ export class PlayerService extends BaseService {
             .pipe(catchError(this.handleError))
     }
 
+    deletePlayers(){
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let authToken = localStorage.getItem('auth_token');
+        headers.append('Authorization', `Bearer ${authToken}`);
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(this.baseUrl + "/admin/deleteplayers", options)
+        .pipe(map(response => response.json))
+        .pipe(catchError(this.handleError))
+    }
+
     getPlayers(): Observable<PlayerDetails> {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');

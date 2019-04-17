@@ -185,13 +185,15 @@ export class PlayerComponent implements OnInit {
     }
 
     getPlayersGO() {
-        this.http.get('https://golf.jacoduplessis.co.za/?format=json').subscribe(response => {
+        this.http.get('http://204.48.31.158:8000/?format=json').subscribe(response => {
             this.data = response;
             console.log(this.data);
             this.leaderboard = this.data.Leaderboards;
             this.tour = this.getTour(this.leaderboard);
             this.tournament = this.tour.Tournament;
             this.players = this.tour.Players;
+            console.log(this.players);
+            this.sortByCupRank();
             this.assignValues();
             this.filteredPlayers = this.players;
             this.filteredPlayers.forEach(element => {
@@ -215,6 +217,17 @@ export class PlayerComponent implements OnInit {
                     },
                     errors => this.errors = errors);
         });
+    }
+
+    sortByCupRank(){
+        function compare(a , b){
+            if(a.Rankings.cup_points > b.Rankings.cup_points)
+                return -1;
+            if(a.Rankings.cup_points < b.Rankings.cup_points)
+                return 1;
+            return 0;
+        }
+        this.players.sort(compare);
     }
 
 

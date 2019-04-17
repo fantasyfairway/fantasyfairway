@@ -27,5 +27,21 @@ table{
   .form-control{
     width:50%;
   }
-  
+
+  .formbutton{
+    display: inline;
+  }
+ 
+  .column {
+    float: left;
+    width: 33%;
+    padding: 10px;
+    height: 900px;
+    margin-top:10px;
+    /* Should be removed. Only for demonstration */
+  }
+}
+
+.formbutton{
+  display: inline;
 }

@@ -4,6 +4,7 @@ export class Player {
     Name: string;
     Rounds: number [] = [];
     CurrentPosition: string;
+    
     Country: string;
     Value: number;
     Selected: boolean;

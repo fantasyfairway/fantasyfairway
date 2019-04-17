@@ -6,7 +6,7 @@ export class ConfigService {
     _apiURI : string;
  
     constructor() {
-        this._apiURI = 'https://fantasyfairway.azurewebsites.net/api';
+        this._apiURI = 'http://localhost:5812/api';
      }
  
      getApiURI() {

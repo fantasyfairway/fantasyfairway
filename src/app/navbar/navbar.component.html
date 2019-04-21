@@ -42,8 +42,6 @@
               Team</a>
           </li>
           <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show" routerLinkActive="active">
-            <a class="nav-link" (click)="toggleNavbar()" [routerLink]="['/help']" *ngIf="readLocalStorageValue()">Help</a>
-          <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show" routerLinkActive="active">
             <a class="nav-link" [routerLink]="['/landing']" *ngIf="readLocalStorageValue()" (click)="logoff()">Log-Off</a>
           </li>
         </ul>

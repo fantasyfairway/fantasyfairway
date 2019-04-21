@@ -41,7 +41,6 @@ export class HelpComponent {
       this.contactForm.reset();
       this.disabledSubmitButton = true;
     }, error => {
-      console.log('Error', error);
     });
   }
 

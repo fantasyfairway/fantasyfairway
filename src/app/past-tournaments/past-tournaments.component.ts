@@ -46,7 +46,6 @@ export class PastTournamentsComponent implements OnInit {
 
     this.teamService.getTourneyDashboard().subscribe(response => {
       this.tournaments = response;
-      console.log(this.tournaments);
       this.tournaments.forEach(tournament => {
         let h3 = document.createElement('h3');
         h3.style.textAlign = "center";
@@ -120,9 +119,8 @@ export class PastTournamentsComponent implements OnInit {
 
   //get the players for the live leaderboard
   getPlayersGO() {
-    this.http.get('https://golf.jacoduplessis.co.za/?format=json').subscribe(response => {
+    this.http.get('http://204.48.31.158:8000/?format=json').subscribe(response => {
       this.data = response;
-      console.log(this.data);
       this.leaderboard = this.data.Leaderboards;
       this.tournament = this.getTournament(this.leaderboard);
       this.players = this.tournament.Players;

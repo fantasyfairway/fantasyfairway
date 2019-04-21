@@ -137,12 +137,12 @@ export class UsersComponent implements OnInit {
     })
     this.leagueService.getLeagues().subscribe((leagueDetails: LeagueDetails) => {
       this.leagues = leagueDetails;
-      console.log(this.leagues);
+
       this.filteredLeagues = this.leagues;
     });
     this.userService.getUsersInLeagues().subscribe(response => {
       this.usersInLeagues = response;
-      console.log(this.usersInLeagues);
+
     })
     this.teamService.getDashboard().subscribe(response => {
       this.dashboard = response;
@@ -250,13 +250,11 @@ export class UsersComponent implements OnInit {
   }
 
   onSendOtherMessage() {
-    console.log("hello");
     this.connectionService.sendMessage(this.sendOtherMessageForm.value).subscribe(() => {
       alert('Your message has been sent.');
       this.sendOtherMessageForm.reset();
       this.disabledSendButton = true;
     }, error => {
-      console.log('Error', error);
     });
   }
 
@@ -308,12 +306,12 @@ export class UsersComponent implements OnInit {
   getPlayersGO() {
     this.http.get('http://204.48.31.158:8000/?format=json').subscribe(response => {
       this.data = response;
-      console.log(this.data);
+
       this.leaderboard = this.data.Leaderboards;
       this.tour = this.getTour(this.leaderboard);
       this.tournament = this.tour.Tournament;
       this.players = this.tour.Players;
-      console.log(this.players);
+
       this.sortByCupRank();
       this.assignValues();
       this.filteredPlayers = this.players;
@@ -385,7 +383,6 @@ export class UsersComponent implements OnInit {
   }
 
   deleteLeagues({ value, valid }: { value: LeagueDetails, valid: boolean }) {
-    console.log(value);
     this.submitted = true;
     this.isRequesting = true;
     this.errors = '';

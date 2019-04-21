@@ -53,7 +53,6 @@ export class DashboardComponent implements OnInit {
 
         this.teamService.getDashboard().subscribe(response => {
             this.leagues = response;
-            console.log(this.leagues);
             this.leagues.forEach(element => {
                 let table = document.createElement('table');
                 table.border = '2';
@@ -138,7 +137,6 @@ export class DashboardComponent implements OnInit {
     getPlayersGO() {
         this.http.get('http://204.48.31.158:8000/?format=json').subscribe(response => {
             this.data = response;
-            console.log(this.data);
             this.leaderboard = this.data.Leaderboards;
             this.tour = this.getTour(this.leaderboard);
             this.tournament = this.tour.Tournament;

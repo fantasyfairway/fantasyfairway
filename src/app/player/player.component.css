@@ -1,6 +1,10 @@
+thead{
+background-color:white;
+}
 button {
  line-height: 1em;
  font-size: 1em;
+ 
 }
 
 /* Split the screen in half */
@@ -58,14 +62,27 @@ button {
 }
 @media screen and (max-width:700px ) {
    H3 .form-control{
-    width:100%;
+   width: 100%;
   }
+#team{
+  width:auto;
+  margin: auto;
+ font-size: 14px;
+
+ }
+#team .btn{
+  height:50px;
+}
+#list tbody{
+font-size: 14px;
 }
 
+}
 @media screen and (min-width:700px ) {
   .form-control{
     width:50%;
   }
+  
 }
 
 .modal-backdrop.fade
@@ -77,7 +94,9 @@ button {
   opacity: 1;
 }
 
+
 table{
   border: black;
   border-style: solid;
+ 
 }

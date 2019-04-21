@@ -1,161 +1,217 @@
+<!DOCTYPE html>
+<html>
+
 <head>
-    <link rel="stylesheet" href="/league.component.css" type="text/css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-    
-        html {
-            width: 100%;
-            height: 100%;
-        }
-    
-        body {
-            width: 100%;
-            height: 100%;
-    
-        }
-    
-        /* Create two equal columns that floats next to each other */
-        .column1 {
-            float: left;
-            width: 50%;
-            padding: 10px;
-            height: 900px;
-            /* Should be removed. Only for demonstration */
-        }
+  <title>League Page</title>
+  <link rel="stylesheet" href="/league.component.css" type="text/css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        .column2 {
-            float: left;
-            width: 50%;
-            padding: 10px;
-            height: 900px;
-            /* Should be removed. Only for demonstration */
-        }
 
-    
-        /* Clear floats after the columns */
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
-        }
-    
-        /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-        @media screen and (max-width: 600px) {
-            .column {
-                width: 100%;
-                height: 100%;
-            }
-        }
-    </style>
 </head>
 
+<div id="col1" class="column">
+  <br>
+  <br>
+  <br>
+  <TABLE BORDER="5" WIDTH="90%" CELLPADDING="5" CELLSPACING="3">
+    <thead>
+      <TR>
+        <TH COLSPAN="3">
+          <BR>
+          <H3>Your Leagues
+            <button (click)="open(delete)" type="button" class="btn btn-outline-dark">Leave League</button>
+          </H3>
+        </TH>
+      </TR>
+      <TR>
+        <TH>User League Id</TH>
+        <TH>League Name</TH>
+        <TH>Team Name</TH>
+      </TR>
+    </thead>
+    <tbody>
+      <tr *ngFor="let league of userLeagues">
+        <td>{{league.userID}}</td>
+        <td>{{league.leagueName}}</td>
+        <td>{{league.teamName}}</td>
+        <!--need to calculate-->
 
-<div id="column1" class="column1">
-
-    <br>
-    <br>
-    <br>
-    <TABLE BORDER="5" WIDTH="90%" CELLPADDING="5" CELLSPACING="3">
-        <thead>
-            <TR>
-                <TH COLSPAN="3"><BR>
-                    <H3>
-                        League Selection 
-                        <div *ngIf="adderrors" class="alert alert-danger" role="alert">
-                            <strong>Oops!</strong> You are already in this league
-                        </div>
-                        <button (click)="open(join)" type="button" class="btn btn-outline-dark">Join League</button>
-                    </H3>
-                    
-                    <input type="text" class="form-control float-right" placeholder="Search By Name..."
-                            [(ngModel)]="searchTerm" />
-
-                </TH>
-            </TR>
-            <TR>
-                <TH (click)="sortLeaguesByID(this.leagues)" type="text"> ID </TH>
-                <TH (click)="sortLeaguesByName(this.leagues)" type="text"> League Name </TH>
-                <TH (click)="sortLeaguesByTeams(this.leagues)" type="text"> Number of Teams </TH>
-            </TR>
-        </thead>
-        <tbody>
-            <tr class ="table-responsive-sm " *ngFor="let league of filteredLeagues">
-                <!--need to fix this-->
-                <td>{{league.leagueId}}</td>
-                <td>{{league.leagueName}}</td>
-                <td>{{league.userCount}}</td>
-                <!--need to calculate this value-->
-            </tr>
-        </tbody>
-    </TABLE>
-</div>
-
-<div class="column2">
-    <br>
-    <br>
-    <br>
-    <TABLE BORDER="5" WIDTH="90%" CELLPADDING="5" CELLSPACING="3">
-        <thead>
-            <TR>
-                <TH COLSPAN="2"><BR>
-                    <H3>Your Leagues </H3>
-                </TH>
-            </TR>
-            <TR>
-                <TH>League Id</TH>
-                <TH>League Name</TH>
-            </TR>
-        </thead>
-        <tbody>
-            <tr *ngFor="let league of userLeagues">
-                <td>{{league.leagueId}}</td>
-                <td>{{league.leagueName}}</td>
-                <!--need to calculate-->
-
-            </tr>
-        </tbody>
-    </TABLE>
+      </tr>
+    </tbody>
+  </TABLE>
 
 </div>
+
+<div class="column">
+  <br>
+  <br>
+  <br>
+  <TABLE BORDER="5" WIDTH="90%" CELLPADDING="5" CELLSPACING="3">
+    <thead>
+      <TR>
+        <TH COLSPAN="3"><BR>
+          <H3>
+            League Selection
+            <div *ngIf="adderrors" class="alert alert-danger" role="alert">
+              <strong>Oops!</strong> You are already in this league
+            </div>
+            <button (click)="open(join)" type="button" class="btn btn-outline-dark">Join League</button>
+          </H3>
+
+          <input type="text" class="form-control float-left" placeholder="Search By Name..." [(ngModel)]="searchTerm" />
+
+        </TH>
+      </TR>
+      <TR>
+        <TH (click)="sortLeaguesByID(this.leagues)" type="text"> ID </TH>
+        <TH (click)="sortLeaguesByName(this.leagues)" type="text"> League Name </TH>
+        <TH (click)="sortLeaguesByTeams(this.leagues)" type="text"> Number of Teams </TH>
+      </TR>
+    </thead>
+    <tbody>
+      <tr *ngFor="let league of filteredLeagues">
+        <!--need to fix this-->
+        <td>{{league.leagueId}}</td>
+        <td>{{league.leagueName}}</td>
+        <td>{{league.userCount}}</td>
+        <!--need to calculate this value-->
+      </tr>
+    </tbody>
+  </TABLE>
+</div>
+
+
 
 <ng-template #join let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">League Join</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <form #f="ngForm" novalidate (ngSubmit)="selectLeague(f)">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">League Join</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
 
-        <div class="form-group">
-          <label for="leagueId">League ID</label>
-          <input id="leagueId" type="number" name="leagueId" [ngModel]="userLeagues.leagueId" ngModel class="form-control"
-            placeholder="League Id">
-        </div>
+    <TABLE BORDER="5" WIDTH="90%" CELLPADDING="5" CELLSPACING="3">
+      <thead>
+        <TR>
+          <TH COLSPAN="3"><BR>
+            <H2>
+              League Selection
+              <div *ngIf="adderrors" class="alert alert-danger" role="alert">
+                <strong>Oops!</strong> You are already in this league
+              </div>
+            </H2>
 
-        <div class="form-group">
-            <label for="id">Team Name</label>
-            <input id="teamname" type="text" name="teamname" [ngModel]="userLeagues.teamname" ngModel class="form-control"
-              placeholder="Team Name">
-          </div>
+            <input type="text" class="form-control float-left" placeholder="Search By Name..."
+              [(ngModel)]="searchTerm" />
 
-        <div class="form-group">
-          <input type="submit" class="btn btn-secondary btn-block" value="Submit">
-        </div>
+          </TH>
+        </TR>
+        <TR>
+          <TH (click)="sortLeaguesByID(this.leagues)" type="text"> League ID </TH>
+          <TH (click)="sortLeaguesByName(this.leagues)" type="text"> League Name </TH>
+          <TH (click)="sortLeaguesByTeams(this.leagues)" type="text"> Number of Teams </TH>
+        </TR>
+      </thead>
+      <tbody>
+        <tr *ngFor="let league of filteredLeagues">
+          <!--need to fix this-->
+          <td>{{league.leagueId}}</td>
+          <td>{{league.leagueName}}</td>
+          <td>{{league.userCount}}</td>
+          <!--need to calculate this value-->
+        </tr>
+      </tbody>
+    </TABLE>
+    <br>
+    <form #f="ngForm" novalidate (ngSubmit)="selectLeague(f)">
 
-        <div *ngIf="errors" class="alert alert-danger" role="alert">
-          <strong>Oops!</strong> You're likely already in this league.
-        </div>
+      <div class="form-group">
+        <label for="leagueId">League ID</label>
+        <input id="leagueId" type="number" name="leagueId" [ngModel]="userLeagues.leagueId" ngModel class="form-control"
+          placeholder="League Id">
+      </div>
 
-        <div *ngIf="success" class="alert alert-success" role="alert">
-          <strong>Joined! You can close this window now and hit F5.</strong>
-        </div>
+      <div class="form-group">
+        <label for="id">Team Name</label>
+        <input id="teamname" type="text" name="teamname" [ngModel]="userLeagues.teamname" ngModel class="form-control"
+          placeholder="Team Name">
+      </div>
 
-      </form>
-    </div>
-  </ng-template>
+      <div class="form-group">
+        <input type="submit" class="btn btn-secondary btn-block" value="Submit">
+      </div>
+
+      <div *ngIf="errors" class="alert alert-danger" role="alert">
+        <strong>Oops!</strong> You're likely already in this league.
+      </div>
+
+      <div *ngIf="success" class="alert alert-success" role="alert">
+        <strong>Joined! You can close this window now and hit F5.</strong>
+      </div>
+
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #delete let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">League Leave</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+
+  </div>
+  <div class="modal-body">
+      <TABLE BORDER="5" WIDTH="90%" CELLPADDING="5" CELLSPACING="3">
+          <thead>
+              <TR>
+                  <TH COLSPAN="3">
+                      <BR>
+                      <H3>Your Leagues 
+                      </H3>
+                  </TH>
+              </TR>
+              <TR>
+                  <TH>User League Id</TH>
+                  <TH>League Name</TH>
+                  <TH>Team Name</TH>
+              </TR>
+          </thead>
+          <tbody>
+              <tr *ngFor="let league of userLeagues">
+                  <td>{{league.userID}}</td>
+                  <td>{{league.leagueName}}</td>
+                  <td>{{league.teamName}}</td>
+                  <!--need to calculate-->
+  
+              </tr>
+          </tbody>
+      </TABLE>
+      <br>
+    <form #f="ngForm" novalidate (ngSubmit)="removeLeague(f)">
+
+      <div class="form-group">
+        <label for="leagueId">User League ID</label>
+        <input id="leagueId" type="number" name="leagueId" [ngModel]="userLeagues.leagueId" ngModel class="form-control"
+          placeholder="League Id">
+      </div>
+
+      <div class="form-group">
+        <input type="submit" class="btn btn-secondary btn-block" value="Submit">
+      </div>
+
+      <div *ngIf="errors" class="alert alert-danger" role="alert">
+        <strong>Oops!</strong> You probably put in the wrong ID
+      </div>
+
+      <div *ngIf="success" class="alert alert-success" role="alert">
+        <strong>Joined! You can close this window now and hit F5.</strong>
+      </div>
+
+    </form>
+  </div>
+</ng-template>
+
+</html>

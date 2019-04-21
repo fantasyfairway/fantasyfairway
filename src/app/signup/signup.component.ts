@@ -30,7 +30,7 @@ export class SignupComponent implements OnInit {
     this.isRequesting = true;
     this.errors = '';
     if (valid) {
-      this.userService.register(value.email, value.username, value.password, value.firstName, value.lastName)
+      this.userService.register(value.username, value.email, value.password, value.firstName, value.lastName)
         .pipe(finalize(() => this.isRequesting = false))
         .subscribe(
           result => {

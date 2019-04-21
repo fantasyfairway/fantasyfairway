@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
 
-  profileDetails: ProfileDetails;
+  profileDetails: any;
   profileUpdate: ProfileUpdate;
   errors: string;  
   isRequesting: boolean;

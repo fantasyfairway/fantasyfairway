@@ -1,6 +1,9 @@
+thead {
+  background-color: whitesmoke;
+}
 button {
- line-height: 1em;
- font-size: 1em;
+  line-height: 1em;
+  font-size: 1em;
 }
 
 /* Split the screen in half */
@@ -16,7 +19,6 @@ button {
 
 /* Control the left side */
 .left {
-  
   left: 0;
   background-color: lightgrey;
 }
@@ -41,33 +43,86 @@ button {
   width: 150px;
   border-radius: 50%;
 }
+* {
+  box-sizing: border-box;
+}
 
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: 900px;
+  margin-top: 10px;
+  /* Should be removed. Only for demonstration */
+}
+
+.column2 {
+  float: right;
+  width: 50%;
+  padding: 10px;
+  height: 900px;
+  /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+.modal-backdrop.fade {
+  opacity: 0.5;
+}
+
+.modal-open .modal {
+  opacity: 1;
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    height: 100%;
+  }
+}
 
 @media screen and (max-width: 600px) {
   .splitleft {
     width: 100%;
   }
-  .splitright{
-      width: 100%;
+  .splitright {
+    width: 100%;
   }
-  
-  H3{
+
+  h3 {
     text-align: center;
   }
-  table{
-    margin:auto;
-  }
- 
-}
-
-@media screen and (max-width:700px ) {
-   H3 .form-control{
-    width:100%;
+  table {
+    margin: auto;
   }
 }
 
-@media screen and (min-width:700px ) {
-   H3 .form-control{
-    width:50%;
+@media screen and (max-width: 700px) {
+  h3 .form-control {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .form-control {
+    width: 50%;
   }
 }

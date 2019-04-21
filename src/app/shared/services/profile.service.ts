@@ -33,8 +33,8 @@ export class ProfileService extends BaseService {
             .pipe(catchError(this.handleError));
     }
 
-    updateProfile(firstName, lastName, phoneNumber, pictureUrl) {
-        let body = JSON.stringify({ firstName, lastName, phoneNumber, pictureUrl });
+    updateProfile(firstName, lastName, username ) {
+        let body = JSON.stringify({ firstName, lastName, username });
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let authToken = localStorage.getItem('auth_token');
         headers.append('Authorization', `Bearer ${authToken}`);

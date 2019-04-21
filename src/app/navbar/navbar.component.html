@@ -33,7 +33,7 @@
               Leagues</a>
           </li>
           <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show" routerLinkActive="active">
-            <a class="nav-link" [routerLink]="['/tournaments']" *ngIf="readLocalStorageValue()">Past Tournaments</a>
+            <a class="nav-link" (click)="toggleNavbar()" [routerLink]="['/tournaments']" *ngIf="readLocalStorageValue()">Past Tournaments</a>
           </li>
           <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show" routerLinkActive="active">
             <a class="nav-link" (click)="toggleNavbar()" [routerLink]="['/dashboard']"

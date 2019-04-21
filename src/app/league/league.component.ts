@@ -57,6 +57,7 @@ export class LeagueComponent implements OnInit {
         });
         this.leagueService.getUserLeagues().subscribe((leagueUserDetails: LeagueUserDetails) => {
             this.userLeagues = leagueUserDetails;
+            console.log(this.userLeagues);
         });
     }
 
@@ -94,7 +95,7 @@ export class LeagueComponent implements OnInit {
         this.submitted = true;
         this.isRequesting = true;
         this.errors = '';
-        this.leagueService.deleteUserFromLeague(league.form.controls.leagueId)
+        this.leagueService.deleteUserFromLeague(league.form.controls.leagueId.value)
             .pipe(finalize(() => this.isRequesting = false))
             .subscribe(
                 result => {

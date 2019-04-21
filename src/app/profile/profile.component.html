@@ -1,7 +1,9 @@
 <!DOCTYPE html>
+<html>
 <div class="page">
 
   <head>
+    <title>Profile Page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
@@ -11,115 +13,103 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald" rel="stylesheet">
 
   </head>
-<br>
+  <br>
+
   <body>
     <br>
-    <div class="container-fluid">
+    <!-- <div class="container-fluid">
       <div class="row content">
         <div class="col-sm-2 sidenav" id="kryesore" style="overflow-y: scroll;">
   
           <br>
-          <img src="//placehold.it/100" class="avatar img-circle float-left " alt="avatar">
+          <img src="//placehold.it/150" class="avatar img-circle float-left " alt="avatar">
+        <label class = "custom-file">
+          <input type ="file" id= "file" class = "custom-file-input">
+          <span class = "custom-file-control">Upload a different photo</span>
+         </label>
+          
+        </div>-->
+
+
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-6">
+          <h4 class="mb-3">Profile</h4>
+
+          <ul style="list-style: none;">
+            <li>First Name: <b>{{profileDetails.firstName}}</b></li>
+            <br>
+            <br>
+            <li>Last Name: <b>{{profileDetails.lastName}}</b></li>
+            <br>
+            <br>
+            <li>Username: <b>{{profileDetails.username}}</b></li>
+            <br>
+            <br>
+            <li>Email: <b>{{profileDetails.email}}</b></li>
+
+
+          </ul>
         </div>
-  
-  
-  
-        <div class="col-lg text-left" syle="width:100%">
-          <br>
-          <div class="container">
-  
-            <ngb-tabset>
-              <ngb-tab title="Profile">
-                <ng-template ngbTabContent>
-                  <div class="container">
-                    <ul style="list-style: none;">
-                      <li>First Name:</li>
-                      <br>
-                      <br>
-                      <li>Last Name:</li>
-                      <br>
-                      <br>
-                      <li>Username:</li>
-                      <br>
-                      <br>
-                      <li>Email:</li>
-  
-  
-                    </ul>
-                  </div>
-                </ng-template>
-              </ngb-tab>
-  
-  
-  
-              <ngb-tab title="Update Profile">
-                <ng-template ngbTabContent>
-                  <div class="container">
+
+
+
+
+
+
+        <!--  <div class="container">
                     <div class="row m-y-2">
                       <div class="col-lg-8 push-lg-4">
                         <div class="col-md-3">
-                        </div>
-  
-                        <div class="row">
-                          <div class="col-md-9 personal-info">
-                            <form class="form-horizontal" role="form">
-                              <div class="form-group">
-                                <label class="col-lg-3 control-label">First name:</label>
-                                <div class="col-lg-8">
-                                  <input class="form-control" type="text">
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <label class="col-lg-3 control-label">Last name:</label>
-                                <div class="col-lg-8">
-                                  <input class="form-control" type="text">
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <label class="col-lg-3 control-label">Username:</label>
-                                <div class="col-lg-8">
-                                  <input class="form-control" type="text">
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <label class="col-md-3 control-label">Email:</label>
-                                <div class="col-md-8">
-                                  <input class="form-control" type="text">
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <label class="col-md-3 control-label">Password:</label>
-                                <div class="col-md-8">
-                                  <input class="form-control" type="password">
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <label class="col-md-3 control-label">Confirm password:</label>
-                                <div class="col-md-8">
-                                  <input class="form-control" type="password">
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <label class="col-md-3 control-label"></label>
-                                <div class="col-md-8">
-                                  <input type="button" class="btn btn-primary" value="Update Profile">
-                                  <span></span>
-                                  <input type="reset" class="btn btn-default" value="Cancel">
-                                </div>
-                              </div>
-  
-                            </form>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </ng-template>
-              </ngb-tab>
-            </ngb-tabset>
-          </div>
+                        </div>-->
+
+
+        <div class="col-md-6 personal-info">
+          <form class="form-horizontal" role="form" #f="ngForm" novalidate (ngSubmit)="updateProfile(f)">
+            <div class="form-group">
+              <h4>Update Profile</h4>
+              <br>
+              <label class="col-lg-3 control-label" for="firstName">First name:</label>
+              <div class="col-lg-8">
+                <input id="firstName" class="form-control" name="firstName" type="text" ngModel>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-lg-3 control-label" for="lastName">Last name:</label>
+              <div class="col-lg-8">
+                <input id="lastName" class="form-control" name="lastName" type="text" ngModel>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-lg-3 control-label" for="username">Username:</label>
+              <div class="col-lg-8">
+                <input id="username" class="form-control" name="username" type="text" ngModel>
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <label class="col-md-3 control-label"></label>
+              <div class="col-md-8">
+                <input type="submit" class="btn btn-primary" value="Update Profile">
+                <span></span>
+                <input type="reset" class="btn btn-default" value="Cancel">
+              </div>
+            </div>
+
+          </form>
         </div>
+
       </div>
     </div>
+
+
+
+
   </body>
 </div>
+
+</html>

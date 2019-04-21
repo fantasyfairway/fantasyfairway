@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
     providedIn: 'root'
 })
 export class ConnectionService {
-    url: string = 'http://localhost:4201/send';
+    url: string = 'mailmicroservice.azurewebsites.net:4201/send';
     constructor(private http: HttpClient) { }
 
     sendMessage(messageContent: any) {

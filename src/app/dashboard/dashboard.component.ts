@@ -136,7 +136,7 @@ export class DashboardComponent implements OnInit {
 
     //get the players for the live leaderboard
     getPlayersGO() {
-        this.http.get('204.48.31.158:8000/?format=json').subscribe(response => {
+        this.http.get('http://204.48.31.158:8000/?format=json').subscribe(response => {
             this.data = response;
             console.log(this.data);
             this.leaderboard = this.data.Leaderboards;

@@ -66,7 +66,7 @@ import { myFocus } from './directives/focus.directive';
       CommonModule,
       HttpModule,
       HttpClientModule,
-      RouterModule.forRoot(appRoutes),
+      RouterModule.forRoot(appRoutes, { useHash: true }),
       NgbModule,
       FormsModule,
       ReactiveFormsModule

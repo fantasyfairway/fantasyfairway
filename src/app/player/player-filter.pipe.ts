@@ -8,7 +8,6 @@ export class PlayerFilterPipe implements PipeTransform
 {
     transform(players: Player[], searchTerm: string): Player[] {
         if (!players || !searchTerm) {
-            console.log(searchTerm);
             return players;
         }
 

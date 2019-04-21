@@ -57,7 +57,6 @@ export class LeagueComponent implements OnInit {
         });
         this.leagueService.getUserLeagues().subscribe((leagueUserDetails: LeagueUserDetails) => {
             this.userLeagues = leagueUserDetails;
-            console.log(this.userLeagues);
         });
     }
 
@@ -91,7 +90,6 @@ export class LeagueComponent implements OnInit {
       }
 
     removeLeague(league) {
-        console.log(league);
         this.submitted = true;
         this.isRequesting = true;
         this.errors = '';

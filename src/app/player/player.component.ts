@@ -83,12 +83,12 @@ export class PlayerComponent implements OnInit {
 
         this.leagueService.getUserLeagues().subscribe((leagueUserDetails: LeagueUserDetails) => {
             this.userLeaguesDetail = leagueUserDetails;
-            console.log(this.userLeaguesDetail);
+
         });
 
         this.teamService.getTeams().subscribe(response => {
             this.teams = response;
-            console.log(this.teams);
+
             this.teams.forEach(element => {
                 //the table
                 let table = document.createElement('table');
@@ -187,12 +187,12 @@ export class PlayerComponent implements OnInit {
     getPlayersGO() {
         this.http.get('http://204.48.31.158:8000/?format=json').subscribe(response => {
             this.data = response;
-            console.log(this.data);
+
             this.leaderboard = this.data.Leaderboards;
             this.tour = this.getTour(this.leaderboard);
             this.tournament = this.tour.Tournament;
             this.players = this.tour.Players;
-            console.log(this.players);
+
             this.sortByCupRank();
             this.assignValues();
             this.filteredPlayers = this.players;
@@ -363,7 +363,7 @@ export class PlayerComponent implements OnInit {
 
         this.teamService.getTeams().subscribe(response => {
             this.teams = response;
-            console.log(this.teams);
+  
             this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
                 this.closeResult = `Closed with: ${result}`;
             }, (reason) => {

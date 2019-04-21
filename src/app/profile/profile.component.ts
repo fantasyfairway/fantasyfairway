@@ -25,7 +25,6 @@ export class ProfileComponent implements OnInit {
     this.profileService.getProfileDetails()
     .subscribe((profileDetails: ProfileDetails) => {
       this.profileDetails = profileDetails;
-      console.log(this.profileDetails);
     },
     error => {
       //this.notificationService.printErrorMessage(error);

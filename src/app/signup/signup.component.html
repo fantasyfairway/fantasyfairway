@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html>
-
 <head>
   <title>Sign up </title>
 
@@ -38,18 +35,18 @@
               </div>
 
               <div class="form-group">
-                  <label for="email">Email</label>
-                  <input id="email" type="text" required name="email" validateEmail class="form-control"
-                    placeholder="Email" ngModel #email="ngModel">
-                  <small [hidden]="email.valid || (email.pristine && !submitted)" class="text-danger">Please enter a valid
-                    email</small>
-                </div>
-  
-                <div class="form-group">
-                  <label for="username">Username</label>
-                  <input id="username" type="text" required name="username" class="form-control" placeholder="Username"
-                    ngModel>
-                </div>
+                <label for="email">Email</label>
+                <input id="email" type="text" required name="email" validateEmail class="form-control"
+                  placeholder="Email" ngModel #email="ngModel">
+                <small [hidden]="email.valid || (email.pristine && !submitted)" class="text-danger">Please enter a valid
+                  email</small>
+              </div>
+
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input id="username" type="text" required name="username" class="form-control" placeholder="Username"
+                  ngModel>
+              </div>
 
               <div class="form-group">
                 <label for="password">Password</label>
@@ -77,5 +74,3 @@
     </div>
   </div>
 </body>
-
-</html>

@@ -173,6 +173,7 @@ footer{
 	-moz-transition: .5s all ease;
   transition: .5s all ease;
   box-shadow: 7px 7px 30px -5px rgba(0,0,0,0.6);
+  background-color: #39547c;
  background-color: rgb(0,0,0,0.6);
  color:white;
  font-weight: bold;

@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Player } from '../player/player';
 import { League } from '../league/league';
 import { Team } from './team';
 import { TeamService } from '../shared/services/team.service';
 import { LeagueService } from '../shared/services/league.service';
-import { LeagueUserDetails } from "../shared/models/leagueuser.details" 
+import { LeagueUserDetails } from "../shared/models/leagueuser.details"
+import { Player } from '../player/player';
+import { PlayerService } from '../shared/services/player.service';
+import { TournamentService } from '../shared/services/tournament.service';
+import { finalize } from 'rxjs/operators';
 
 @Component
     ({
@@ -20,9 +23,12 @@ export class DashboardComponent implements OnInit {
 
     data: any;
     leaderboard: any;
+    tour: any;
     tournament: any;
-    players: any;
-    userLeagues: LeagueUserDetails;
+    players: Player[] = [];
+    filteredPlayers: Player[] = [];
+    isRequesting: any;
+    errors: any;
     //league: Team[] = [];
     teams: Team[] = [];
     t = new Team;
@@ -33,21 +39,17 @@ export class DashboardComponent implements OnInit {
 
 
 
-    constructor(private http: HttpClient, private teamService: TeamService) { }
+    constructor(private http: HttpClient, private teamService: TeamService, private playerService: PlayerService, private tournamentService: TournamentService) { }
 
 
     ngOnInit() {
+
+
         //this.getPlayersBE();
         this.getPlayersGO();
         this.teams.push(this.t);
         this.teams.push(this.t);
         this.teams.push(this.t);
-      
-        this.http.get('https://localhost:5153/api/player').subscribe(response => {
-            this.data = response;
-        }, error => {
-            console.log(error);
-        });
 
         this.teamService.getDashboard().subscribe(response => {
             this.leagues = response;
@@ -134,32 +136,86 @@ export class DashboardComponent implements OnInit {
 
     //get the players for the live leaderboard
     getPlayersGO() {
-                this.http.get('https://golf.jacoduplessis.co.za/?format=json').subscribe(response => {
-                    this.data = response;
-                    console.log(this.data);
-                    this.leaderboard = this.data.Leaderboards;
-                    this.tournament = this.getTournament(this.leaderboard);
-                    this.players = this.tournament.Players;
-                });
-            }
+        this.http.get('http://204.48.31.158:8000/?format=json').subscribe(response => {
+            this.data = response;
+            console.log(this.data);
+            this.leaderboard = this.data.Leaderboards;
+            this.tour = this.getTour(this.leaderboard);
+            this.tournament = this.tour.Tournament;
+            this.players = this.tour.Players;
+            this.sortByCupRank();
+            this.filteredPlayers = this.players;
+            this.sortByTotal();
+            this.assignValues();
+            this.filteredPlayers.forEach(element => {
+                this.playerService.createPlayer(element.Name,
+                    element.Rounds[0], element.Rounds[1], element.Rounds[2], element.Rounds[3],
+                    element.ID, element.Value)
+                    .pipe(finalize(() => this.isRequesting = false))
+                    .subscribe(
+                        result => {
+                            if (result) {
+                            }
+                        },
+                        errors => this.errors = errors);
+            });
+            this.tournamentService.createTournament(this.tournament, this.tour.Date)
+                .pipe(finalize(() => this.isRequesting = false))
+                .subscribe(
+                    result => {
+                        if (result) {
+                        }
+                    },
+                    errors => this.errors = errors);
+        });
+    }
 
     //supports the go api call. retrieves pga tour from array of golf leagues
-    getTournament(leaderboard) {
-                for(this.x; this.x < 3; this.x++) {
+    getTour(leaderboard) {
+        for (this.x; this.x < 3; this.x++) {
             if (leaderboard[this.x].Tour == "PGA Tour") {
                 return (leaderboard[this.x]);
             }
         }
     }
 
-
-    expandTeam(Team) {
-        Team.expanded = true;
-        this.expandedTeam = JSON.parse(JSON.stringify(Team.players));
+    sortByCupRank() {
+        function compare(a, b) {
+            if (a.Rankings.cup_points> b.Rankings.cup_points)
+                return -1;
+            if (a.Rankings.cup_points < b.Rankings.cup_points)
+                return 1;
+            return 0;
+        }
+        this.players.sort(compare);
     }
 
-    collapseTeam(team) {
-        team.expanded = false;
-        this.expandedTeam = null;
+    sortByTotal() {
+        function compare(a, b) {
+            if (a.Total < b.Total)
+                return -1;
+            if (a.Total > b.Total)
+                return 1;
+            return 0;
+        }
+        this.players.sort(compare);
+    }
+
+    assignValues() {
+        var arrayLength = this.players.length;
+        for (this.i; this.i < arrayLength; this.i++) {
+            this.players[this.i].Selected = false;
+            this.players[this.i].ID = this.i;
+            if (this.i <= 9) {
+                this.players[this.i].Value = 500;
+            }
+            else if (this.i >= 10 && this.i <= 19) {
+                this.players[this.i].Value = 200;
+            }
+            else if (this.i >= 20 && this.i < arrayLength) {
+                this.players[this.i].Value = 100;
+            }
+        }
+
     }
 }

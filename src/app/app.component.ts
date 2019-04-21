@@ -34,57 +34,24 @@ export class AppComponent {
   constructor(private http: HttpClient, private playerService: PlayerService, private tournamentService: TournamentService) { }
 
   ngOnInit() {
-    
     fetch("https://fantasyfairway.azurewebsites.net/api/auth/check", { method: "GET", mode: "cors", headers: { "Authorization": `Bearer ${localStorage.getItem("auth_token")}` } })
       .then(function (response) {
         if (response.status == 401) {
           localStorage.removeItem("auth_token");
         }
       })
-    
-    this.http.get('http://204.48.31.158:8000/?format=json').subscribe(response => {
-      this.data = response;
-      console.log(this.data);
-      this.leaderboard = this.data.Leaderboards;
-      this.tour = this.getTour(this.leaderboard);
-      this.tournament = this.tour.Tournament;
-      this.players = this.tour.Players;
-      this.sortByCupRank();
-      this.assignValues();
-      this.filteredPlayers = this.players;
-      this.filteredPlayers.forEach(element => {
-        this.playerService.createPlayer(element.Name,
-          element.Rounds[0], element.Rounds[1], element.Rounds[2], element.Rounds[3],
-          element.ID, element.Value)
-          .pipe(finalize(() => this.isRequesting = false))
-          .subscribe(
-            result => {
-              if (result) {
-              }
-            },
-            errors => this.errors = errors);
-      });
-      this.tournamentService.createTournament(this.tournament, this.tour.Date)
-        .pipe(finalize(() => this.isRequesting = false))
-        .subscribe(
-          result => {
-            if (result) {
-            }
-          },
-          errors => this.errors = errors);
-    });
   }
 
-  sortByCupRank(){
-    function compare(a , b){
-        if(a.Rankings.cup_points > b.Rankings.cup_points)
-            return -1;
-        if(a.Rankings.cup_points < b.Rankings.cup_points)
-            return 1;
-        return 0;
+  sortByCupRank() {
+    function compare(a, b) {
+      if (a.Rankings.cup_points > b.Rankings.cup_points)
+        return -1;
+      if (a.Rankings.cup_points < b.Rankings.cup_points)
+        return 1;
+      return 0;
     }
     this.players.sort(compare);
-}
+  }
 
   assignValues() {
     var arrayLength = this.players.length;

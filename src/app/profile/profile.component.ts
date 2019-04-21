@@ -38,11 +38,11 @@ export class ProfileComponent implements OnInit {
     this.errors='';
     if(valid)
     {
-        this.profileService.updateProfile(value.firstName,value.lastName,value.pictureURL,value.phoneNumber)
+        this.profileService.updateProfile(value.firstName,value.lastName,value.username)
                   .pipe(finalize(() => this.isRequesting = false))
                   .subscribe(
                     result  => {if(result){
-                        this.router.navigate(['/profile']);                         
+                        setTimeout(function () { window.location.reload(); }, 10)                         
                     }},
                     errors =>  this.errors = errors);
     }  

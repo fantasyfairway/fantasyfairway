@@ -59,7 +59,7 @@ export class UsersComponent implements OnInit {
 
 
   //sendResultsForm: FormGroup;
-  
+
   sendOtherMessageForm: FormGroup;
   sendSignUpReminderForm: FormGroup;
   sendWeeklyReportsForm: FormGroup;
@@ -401,6 +401,25 @@ export class UsersComponent implements OnInit {
           },
           errors => this.errors = errors);
     }
+  }
+
+  copyEmails() {
+    var body = document.body, range, sel;
+    let el = document.getElementById('tablUsers');
+    if (document.createRange && window.getSelection) {
+      range = document.createRange();
+      sel = window.getSelection();
+      sel.removeAllRanges();
+      try {
+        range.selectNodeContents(el);
+        sel.addRange(range);
+      } catch (e) {
+        range.selectNode(el);
+        sel.addRange(range);
+      }
+    }
+    document.execCommand("copy");
+    alert("Copied all user emails");
   }
 
   open(content) {

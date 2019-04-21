@@ -34,7 +34,6 @@ export class AppComponent {
   constructor(private http: HttpClient, private playerService: PlayerService, private tournamentService: TournamentService) { }
 
   ngOnInit() {
-
     fetch("https://fantasyfairway.azurewebsites.net/api/auth/check", { method: "GET", mode: "cors", headers: { "Authorization": `Bearer ${localStorage.getItem("auth_token")}` } })
       .then(function (response) {
         if (response.status == 401) {

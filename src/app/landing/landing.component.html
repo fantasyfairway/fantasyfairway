@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Fantasy Golf</title>
+    <title>Fantasy Fairway Landing</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -19,22 +19,20 @@
 <body>
 
     <link rel="stylesheet" href="/landing.component.css" type="text/css">
-    <!--<link rel="stylesheet" href="login-signin.css" type="text/css"> -->
+
 
     <div class="jumbotron">
         <div class="header1">
             <h1 style="font-size: 50px">Fantasy Golf</h1>
 
-            <button type="button" class="btn btn-primary btn-lg" [routerLink]="['/login']">
+            <button type="button" class="btn btn-primary btn-lg" [routerLink]="['/login']" *ngIf="readLocalStorageValue()">
                 Log in
             </button>
-            <button type="button" class="btn btn-primary btn-lg" [routerLink]="['/signup']">
+            <button type="button" class="btn btn-primary btn-lg" [routerLink]="['/signup']" *ngIf="readLocalStorageValue()">
                 Sign Up
             </button>
 
-            <!--<div class= "nav-item" data-toggle="collapse" data-target=".navbar-collapse.show" routerLinkActive="active"> 
-            <a class="nav-link" [routerLink]="['/login']">Login</a>
-    </div>-->
+    
         </div>
     </div>
 
@@ -45,7 +43,7 @@
 
 
 
-        <!--<br><br><br>-->
+
         <div class="section">
             <div class="content">
                 <div class="heading">
@@ -193,9 +191,7 @@
         </div>
     </div>
     <div class="parallax"></div>
-    <!--<footer>
-    <p><a href="#">Terms and Conditions link</a></p>
-</footer> -->
+
 </body>
 
 </html>

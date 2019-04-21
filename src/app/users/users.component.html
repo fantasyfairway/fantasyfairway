@@ -7,13 +7,18 @@
 <br>
 
 <div class="container-fluid">
-  <h1 style="text-align:center">Welcome to the Admin Dashboard</h1>
-  <button style="margin: 5px" type="button" (click)="endWeek()">End the tournament (ONLY PRESS AT THE END OF A
+  <div class="row justify-content-center">
+  <h1 >Welcome to the Admin Dashboard</h1>
+  </div>
+  <br>
+  <div class="row justify-content-center">
+  <button style="margin: 5px"  type="button" (click)="endWeek()">End the tournament (ONLY PRESS AT THE END OF A
     TOURNAMENT WEEK)</button>
-  <button style="margin: 5px" type="button" (click)="getPlayersGO()">Reset Players (If the stored players are wrong [WILL
+  <br>
+  <button style="margin: 5px"  type="button" (click)="getPlayersGO()">Reset Players (If the stored players are wrong [WILL
     BREAK TEAMS])</button>
-  <br>
-  <br>
+  </div>
+
 
   <!--<div class="form-group">
     <input type="text" class="form-control" placeholder="Search By Name..." style="width:400px"
@@ -91,41 +96,40 @@
   </select>-->
 
 
-<div class = "formbuttons">
-  <form class="container-fluid" [formGroup]="sendWeeklyReportsForm" (ngSubmit)="onSendWeeklyReport()">
+<!-- <div class = "formbuttons">
+  <form class="container-fluid" [formGroup]="sendWeeklyReport" (ngSubmit)="onSendWeeklyReport()">
   <h1 style="text-align:center">Send Emails</h1>
 
-    <!-- Send weekly reports button -->
+
     <button style="margin: 5px" mdbBtn color="info" outline="true" block="true"  mdbWavesEffect
-    type="submit" [disabled]="disabledSendButton">Send Weekly Report</button>
+    type="submit" [disabled]="disabledSubmitButton">Send Weekly Report</button>
   </form>
 
 
-  <form class="container-fluid" [formGroup]="sendOverallReportsForm" (ngSubmit)="onSendOverallReport()">
-   <!-- Send overall reports button -->
+  <form class="container-fluid" [formGroup]="sendOverallReport" (ngSubmit)="onSendOverallReport()">
+
      <button style="margin: 5px" mdbBtn color="info" outline="true" block="true"  mdbWavesEffect
-     type="submit" [disabled]="disabledSendButton">Send Overall Report</button>
+     type="submit" [disabled]="disabledSubmitButton">Send Overall Report</button>
   </form>
 
 
-  <form class="container-fluid" [formGroup]="sendSignUpReminderForm" (ngSubmit)="onSendSignUpReminder()">
-   <!-- Send sign up reminders button -->
+  <form class="container-fluid" [formGroup]="sendSignUpReminder" (ngSubmit)="onSendSignUpReminder()">
+
     <button mdbBtn style="margin: 5px" color="info" outline="true" block="true"  mdbWavesEffect
-    type="submit" [disabled]="disabledSendButton">Send Sign-up Reminder</button>
+    type="submit" [disabled]="disabledSubmitButton">Send Sign-up Reminder</button>
   </form>
 
 
   <form class="container-fluid" [formGroup]="sendOtherMessageForm" (ngSubmit)="onSendOtherMessage()">
-  <!--Send other Message -->
   <div class="form-group">
     <textarea formControlName="sendOtherMessageForm" class="form-control rounded-0" mdbInputDirective
       id="exampleFormControlTextarea2" rows="2" placeholder="Other Message"></textarea>
   </div>
 
   <button mdbBtn style="margin: 5px" color="info" outline="true" block="true" mdbWavesEffect
-  type="submit"[disabled]="disabledSendButton">Send Other Message</button>
+  type="submit"[disabled]="disabledSubmitButton">Send Other Message</button>
   </form>
-</div>
+</div> -->
 
   <!-- Send button OG code
   <button mdbBtn color="info" outline="true" block="true" class="z-depth-0 my-4 waves-effect" mdbWavesEffect
@@ -143,37 +147,37 @@
 
   <div class="row">
     <div class="column">
-      <table ID="tablUsers" BORDER="5" WIDTH="95%" CELLPADDING="5" CELLSPACING="3">
+      <table id="tablUsers" BORDER="5" WIDTH="100%" CELLPADDING="5" CELLSPACING="3">
         <thead>
-          <TR>
-            <TH COLSPAN="4"><BR>
-              <H3>List of Users</H3>
+          <TR class="unselectable">
+            <TH COLSPAN="4" ><BR>
+              <H3 >List of Users</H3>
+              <br> 
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search By Name..." style="width:200px"
-                  [(ngModel)]="searchTerm" />
+                  <button (click)="copyEmails()" type="button" class="btn btn-outline-dark">Copy Emails</button>
               </div>
             </TH>
           </TR>
           <TR>
-            <TH>ID <button (click)="sortUsersByID(this.users)" type="button" class="btn btn-outline-dark">sort
+            <TH class="unselectable">ID <button (click)="sortUsersByID(this.users)" type="button" class="btn btn-outline-dark">sort
                 by</button>
             </TH>
-            <TH>Name <button (click)="sortUsersByName(this.users)" type="button" class="btn btn-outline-dark">sort
+            <TH class="unselectable">Name <button (click)="sortUsersByName(this.users)" type="button" class="btn btn-outline-dark">sort
                 by</button> </TH>
-            <TH>Username <button (click)="sortUsersByUsername(this.users)" type="button"
+            <TH class="unselectable">Username <button (click)="sortUsersByUsername(this.users)" type="button"
                 class="btn btn-outline-dark">sort
                 by</button> </TH>
-            <TH>Email <button (click)="sortUsersByEmail(this.users)" type="button" class="btn btn-outline-dark">sort
+            <TH class="unselectable">Email <button (click)="sortUsersByEmail(this.users)" type="button" class="btn btn-outline-dark">sort
                 by</button> </TH>
 
           </TR>
         </thead>
         <tbody>
           <tr *ngFor="let user of users">
-            <td>{{user.id}}</td>
-            <td>{{user.firstName}} {{user.lastName}}</td>
-            <td>{{user.username}}</td>
-            <td>{{user.email}}</td>
+            <td class="unselectable" >{{user.id}}</td>
+            <td class="unselectable">{{user.firstName}} {{user.lastName}}</td>
+            <td class="unselectable" >{{user.username}}</td>
+            <td class="selectable" id="email">{{user.email}},</td>
           </tr>
       </table>
     </div>

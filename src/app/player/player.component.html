@@ -1,6 +1,7 @@
 
 
 <head>
+    <title>Manage Team Page</title>
     <link rel="stylesheet" href="/player.component.css" type="text/css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -59,7 +60,7 @@
 
     <br>
     <br>
-    <TABLE class ="table-responsive-sm " id="team" BORDER="5" WIDTH="90%" CELLPADDING="5" CELLSPACING="3">
+    <TABLE  id="team" BORDER="5" WIDTH="90%" CELLPADDING="2" CELLSPACING="3">
         <thead>
             <TR>
                 <TH COLSPAN="5"><BR>
@@ -83,7 +84,7 @@
                 <td>{{player.Country}}</td>
                 <td>{{player.Value}}</td>
                 <button (click)="removePlayer(this.player, this.player.ID)" *ngIf="this.player.Selected" type="button"
-                    class="btn btn-outline-danger">Remove Golfer</button>
+                    class="btn btn-outline-danger" >Remove Golfer</button>
             </tr>
         </tbody>
     </TABLE>
@@ -95,12 +96,12 @@
 <div class="column">
     <br>
     <br>
-    <TABLE BORDER="5" WIDTH="90%" CELLPADDING="5" CELLSPACING="3">
+    <TABLE id ="list" BORDER="5" WIDTH="90%" CELLPADDING="2" CELLSPACING="3">
         <thead>
             <TR>
                 <TH COLSPAN="5"><BR>
                     <H3>{{tournament}} <input type="text" class="form-control float-right"
-                            placeholder="Search By Name..." style="width:400px" [(ngModel)]="searchTerm"> </H3>
+                            placeholder="Search By Name..."  [(ngModel)]="searchTerm"> </H3>
                 </TH>
             </TR>
 
@@ -114,7 +115,7 @@
         </thead>
         <tbody>
 
-            <tr class ="table-responsive-sm " *ngFor="let player of filteredPlayers">
+            <tr *ngFor="let player of filteredPlayers">
                 <td>{{player.ID}} </td>
                 <td>{{player.Name}}</td>
                 <td>{{player.Country}}</td>
@@ -123,7 +124,7 @@
                 <button (click)="selectPlayer(this.player, this.player.ID)" *ngIf="!this.player.Selected" type="button"
                     class="btn btn-outline-dark">Add Golfer</button>
                 <button (click)="removePlayer(this.player, this.player.ID)" *ngIf="this.player.Selected" type="button"
-                    class="btn btn-outline-danger">Remove Golfer</button>
+                    class="btn btn-outline-danger" > Remove Golfer</button>
             </tr>
         </tbody>
     </TABLE>
@@ -132,7 +133,7 @@
 
 <ng-template #save let-modal>
     <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Save Team</h4>
+        <h3 class="modal-title" id="modal-basic-title">Save Team</h3>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -194,7 +195,7 @@
                 </div>
     
                 <div *ngIf="errors" class="alert alert-danger" role="alert">
-                    <strong>Oops!</strong> You likely put in the wrong ID. If this persists sign in again.
+                    <strong>Oops!</strong> You likely put in the wrong ID or it's too late in the week to add to a team (not Mon, Tues, or Wed). If everything looks right then try signing in again.
                 </div>
     
                 <div *ngIf="success" class="alert alert-success" role="alert">

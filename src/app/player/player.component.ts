@@ -289,8 +289,10 @@ export class PlayerComponent implements OnInit {
         });
         var d = new Date();
         var day = d.toDateString();
+        var check = day.slice(0, 3);
+        console.log(check);
         if (v == 1000 
-            && (day.slice(0, 3) == "Mon" || day.slice(0, 3) == "Tue" || day.slice(0, 3) == "Wed") == true) { this.saveButton = true; }
+            && (check == "Mon" || check == "Tue" || check == "Wed") == true) { this.saveButton = true; }
         else { this.saveButton = false; }
     }
 

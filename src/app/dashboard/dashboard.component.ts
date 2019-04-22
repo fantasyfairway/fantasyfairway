@@ -142,9 +142,8 @@ export class DashboardComponent implements OnInit {
             this.tournament = this.tour.Tournament;
             this.players = this.tour.Players;
             this.sortByCupRank();
-            this.filteredPlayers = this.players;
-            this.sortByTotal();
             this.assignValues();
+            this.filteredPlayers = this.players;
             this.filteredPlayers.forEach(element => {
                 this.playerService.createPlayer(element.Name,
                     element.Rounds[0], element.Rounds[1], element.Rounds[2], element.Rounds[3],
@@ -157,6 +156,7 @@ export class DashboardComponent implements OnInit {
                         },
                         errors => this.errors = errors);
             });
+            this.sortByTotal();
             this.tournamentService.createTournament(this.tournament, this.tour.Date)
                 .pipe(finalize(() => this.isRequesting = false))
                 .subscribe(

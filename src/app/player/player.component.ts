@@ -270,6 +270,7 @@ export class PlayerComponent implements OnInit {
         for (let o = 0; o < this.team.length; o++) {
             if (this.team[o] == player) { this.team.splice(index, 1) };
         };
+        this.validate(this.team);
     }
 
     validateTeam(player, team) {

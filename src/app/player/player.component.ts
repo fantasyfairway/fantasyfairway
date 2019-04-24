@@ -219,11 +219,11 @@ export class PlayerComponent implements OnInit {
         });
     }
 
-    sortByCupRank(){
-        function compare(a , b){
-            if(a.Rankings.cup_points > b.Rankings.cup_points)
+    sortByCupRank() {
+        function compare(a, b) {
+            if (a.Rankings.cup_points > b.Rankings.cup_points)
                 return -1;
-            if(a.Rankings.cup_points < b.Rankings.cup_points)
+            if (a.Rankings.cup_points < b.Rankings.cup_points)
                 return 1;
             return 0;
         }
@@ -287,7 +287,10 @@ export class PlayerComponent implements OnInit {
         players.forEach(player => {
             v += player.Value;
         });
-        if (v == 1000) { this.saveButton = true; }
+        var d = new Date();
+        var day = d.toDateString();
+        if (v == 1000 
+            && (day.slice(0, 3) == "Mon" || day.slice(0, 3) == "Tue" || day.slice(0, 3) == "Wed") == true) { this.saveButton = true; }
         else { this.saveButton = false; }
     }
 
@@ -363,7 +366,7 @@ export class PlayerComponent implements OnInit {
 
         this.teamService.getTeams().subscribe(response => {
             this.teams = response;
-  
+
             this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
                 this.closeResult = `Closed with: ${result}`;
             }, (reason) => {
